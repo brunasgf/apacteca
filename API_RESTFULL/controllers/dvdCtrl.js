@@ -1,8 +1,8 @@
-const Queries = require("./queriesCtrl")
+const Job = require("./jobCtrl")
 
-class DvdController extends Queries {
+class DvdController extends Job {
     constructor() {
-        super("dvd", ['diretor', 'descrição'])
+        super()
     }
 
     create(params) {
@@ -13,8 +13,7 @@ class DvdController extends Queries {
                         if (err) {
                             reject(err)
                         } else {
-                            console.log(params)
-                            const sql = `INSERT INTO ${this.table} (${this.strColumns}) VALUES ("${params.diretor}","${params.descricao}")`
+                            const sql = `INSERT INTO dvd (diretor, descrição) VALUES ("${params.diretor}","${params.descricao}")`
 
                             this.conn.query(sql, (err, result) => {
                                 if (err) {
@@ -31,7 +30,13 @@ class DvdController extends Queries {
                 this.conn.end()
                 return Promise.resolve(res)
             })
+            .then((res)=>{
+                params.idLivro = null
+                params.idDvd = res.insertId
+                return this.createJob(params)
+            })
             .catch((err)=>{
+                console.log(err)
                 this.conn.end()
                 return Promise.reject(err)
             })

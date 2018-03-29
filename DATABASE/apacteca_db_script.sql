@@ -63,21 +63,15 @@ insert into `status` (nome) values
 -- -----------------------------------------------------
 -- Table `apacteca_db`.`obra`
 -- -----------------------------------------------------
-
-insert into obra 
-(quantidade, tiulo, is_livro, is_dvd, genero_id, status_id)
-values
-(10, "procurando dory", null, 1, 3, 1);
-
 CREATE TABLE IF NOT EXISTS `apacteca_db`.`obra` (
-  `id_obra` INT NOT NULL,
+  `id_obra` INT NOT NULL AUTO_INCREMENT,
   `quantidade` INT NOT NULL,
   `tiulo` VARCHAR(45) NOT NULL,
   `is_livro` INT,
   `is_dvd` INT,
   `genero_id` INT NOT NULL,
   `status_id` INT NOT NULL,
-  PRIMARY KEY (`id_obra`, `genero_id`, `status_id`),
+  PRIMARY KEY (`id_obra`),
   INDEX `fk_Obra_genero1_idx` (`genero_id` ASC),
   INDEX `fk_obra_status1_idx` (`status_id` ASC),
   CONSTRAINT `fk_Obra_livro`
@@ -102,6 +96,11 @@ CREATE TABLE IF NOT EXISTS `apacteca_db`.`obra` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+insert into obra 
+(quantidade, tiulo, is_livro, is_dvd, genero_id, status_id)
+values
+(10, "procurando dory", null, 1, 3, 1);
+
 -- -----------------------------------------------------
 -- Table `apacteca_db`.`pessoa`
 -- -----------------------------------------------------
@@ -122,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `apacteca_db`.`emprestimo` (
   `pessoa_id` INT NOT NULL,
   `data_emprestimo` VARCHAR(45) NOT NULL,
   `data_devolucao` VARCHAR(45) NULL,
-  PRIMARY KEY (`idemprestimo`, `obra_id`, `pessoa_id`),
+  PRIMARY KEY (`idemprestimo`),
   INDEX `fk_emprestimo_Obra1_idx` (`obra_id` ASC),
   INDEX `fk_emprestimo_pessoa1_idx` (`pessoa_id` ASC),
   CONSTRAINT `fk_emprestimo_Obra1`
