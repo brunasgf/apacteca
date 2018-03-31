@@ -72,7 +72,7 @@ class Query{
         return strQuery
     }
 
-    getById(id, columns = "*"){
+    getById(id){
         return this.createConnectionSQL()
         .then(()=>{
             return new Promise((resolve, reject)=>{
@@ -103,7 +103,7 @@ class Query{
         })
     }
 
-    getAll(columns = "*"){
+    getAll(){
         return this.createConnectionSQL()
         .then(()=>{
             return new Promise((resolve, reject)=>{

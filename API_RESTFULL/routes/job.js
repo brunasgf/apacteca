@@ -4,9 +4,9 @@ class RouteJob{
 		this.jobController = new JobController()
 		this.app = app
 
-		this.app.route('/job')
-		.get((req, res) => {
-			this.jobController.getAll()
+		this.app.route('/job/getAll')
+		.post((req, res) => {
+			this.jobController.getAll(req.body)
 			.then(response => {
 				res.status(200)
 				res.json(response)
@@ -15,6 +15,8 @@ class RouteJob{
 				console.log(err)
 			})
 		})
+
+		this.app.route('/job')
 		.post((req, res) => {
 		const body = req.body
 		return this.jobController.create(req.body)
