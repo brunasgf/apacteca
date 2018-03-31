@@ -37,6 +37,37 @@ class PersonController extends Queries {
             })
     }
 
+    getByRg(rg, columns = "*"){
+        return this.createConnectionSQL()
+        .then(()=>{
+            return new Promise((resolve, reject)=>{
+                this.conn.connect((err)=>{
+                    if(err){
+                        reject(err)
+                    }else{
+                        const sql = `SELECT * FROM ${this.table} WHERE rg = ${rg}`
+    
+                        this.conn.query(sql, (err, result, fields)=>{
+                            if(err){
+                                reject(err)
+                            }else{
+                                resolve(result)
+                            }
+                        })
+                    }
+                })
+            })
+        })
+        .then((res)=>{
+            this.conn.end()
+            return Promise.resolve(res)
+        })
+        .catch((err)=>{
+            this.conn.end()
+            return Promise.reject(err)
+        })
+    }
+
 }
 
 module.exports = PersonController

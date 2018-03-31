@@ -1,7 +1,4 @@
 const JobController = require('../controllers/jobCtrl')
-const Livro = require("../controllers/bookCtrl")
-const Dvd = require("../controllers/dvdCtrl")
-
 class RouteJob{
 	constructor(app){
 		this.jobController = new JobController()
@@ -20,15 +17,7 @@ class RouteJob{
 		})
 		.post((req, res) => {
 		const body = req.body
-		return new Promise((resolve, reject)=>{
-			if(body.autor){
-				const livro = new Livro()
-				resolve(livro.create(body))
-			}else if(body.diretor && body.descricao){
-				const dvd = new Dvd()
-				resolve(dvd.create(body))
-			}
-		})
+		return this.jobController.create(req.body)
 			.then(response => {
 				res.status(200)
 				res.json(response)
