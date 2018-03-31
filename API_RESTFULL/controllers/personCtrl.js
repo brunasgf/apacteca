@@ -46,7 +46,7 @@ class PersonController extends Queries {
                     if(err){
                         reject(err)
                     }else{
-                        `SELECT * FROM pessoa ${this.getFIlterQuery(params)} ORDER BY nome`
+                        const sql = `SELECT * FROM pessoa ${this.getFIlterQuery(params)} ORDER BY nome`
                         this.conn.query(sql, (err, result, fields)=>{
                             if(err){
                                 reject(err)
@@ -128,7 +128,7 @@ class PersonController extends Queries {
                     if(err){
                         reject(err)
                     }else{
-                        `SELECT
+                        const sql = `SELECT
                             obr.titulo 'titulo',
                             pss.nome 'nomePessoa',
                             data_emprestimo,

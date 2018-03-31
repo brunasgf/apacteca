@@ -46,7 +46,7 @@ class JobController extends Queries {
                         reject(err)
                     }else{
 
-                        `SELECT id_Obra,
+                        const sql = `SELECT id_Obra,
                             qtd,
                             titulo,
                             gen.nome 'genero',
@@ -90,7 +90,7 @@ class JobController extends Queries {
                         reject(err)
                     }else{
 
-                        `SELECT id_Obra,
+                        const sql = `SELECT id_Obra,
                             qtd,
                             titulo,
                             gen.nome 'genero',

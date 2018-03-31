@@ -68,7 +68,7 @@ class PersonController extends Queries {
                     if(err){
                         reject(err)
                     }else{
-                        `SELECT
+                        const sql = `SELECT
                             obr.titulo 'titulo',
                             pss.nome 'nomePessoa',
                             data_emprestimo,
