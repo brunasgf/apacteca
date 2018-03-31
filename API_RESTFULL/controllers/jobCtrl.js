@@ -58,7 +58,7 @@ class JobController extends Queries {
                         INNER JOIN genero as gen ON gen.id_genero = obr.genero_id
                         INNER JOIN status as sta ON sta.id_status = obr.status_id
                         INNER JOIN tipo as tip ON tip.id_tipo= obr.tipo_id
-                        ${this.getFIlterQuery(params)} ORDER BY id_obra`
+                        ${this.getFilterQuery(params)}ORDER BY id_obra`
     
                         this.conn.query(sql, (err, result, fields)=>{
                             if(err){
@@ -125,26 +125,26 @@ class JobController extends Queries {
         })
     }
 
-    getFIlterQuery(params){
+    getFilterQuery(params){
         let query = ""
         let keys = Object.keys(params)
         if(keys.length){
             query += "WHERE "
             for(let i = 0 ; i < keys.length ; i++){
-                if(i > 1){
+                if(i >= 1){
                     query += "AND "
                 }
 
                 if(keys[i] === 'autor'){
-                    query += `autor LIKE '%${params[keys[i]]}%'`
+                    query += `autor LIKE '%${params[keys[i]]}%' `
                 } else if(keys[i] === 'titulo'){
-                    query += `titulo LIKE '%${params[keys[i]]}%'`
+                    query += `titulo LIKE '%${params[keys[i]]}%' `
                 } else if(keys[i] === 'idTipo'){
-                    query += `tipo_id  = ${params[keys[i]]}`
+                    query += `tipo_id  = ${params[keys[i]]} `
                 } else if(keys[i] === 'idStatus'){
-                    query += `status_id = ${params[keys[i]]}`
+                    query += `status_id = ${params[keys[i]]} `
                 } else if(keys[i] === 'idGenero'){
-                    query += `genero_id = ${params[keys[i]]}`
+                    query += `genero_id = ${params[keys[i]]} `
                 }
             }
         }
