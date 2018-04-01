@@ -127,17 +127,11 @@
                         Excluir
                       </th>
                     </tr>
-                    <tbody>
+                    <tbody id="lista">
                       <tr>
-                        <td>
-                          1
-                        </td>
-                        <td>
-                          O morro dos ventos uivantes
-                        </td>
-                        <td>
-                          não lembro
-                        </td>
+                        <td>1</td>
+                        <td>O morro dos ventos uivantes</td>
+                        <td>não lembro</td>
                         <td>
                           <i class="fa fa-eye" data-toggle="modal" data-target="#modalVisualizar"></i>
                         </td>
@@ -471,19 +465,34 @@
     <script>
 
       window.onload = () => {
-        //create();
+        lista.addEventListener('click', del);
+        read();
+
       };
 
+      function templateLista(id, titulo, autor, element = true) {
+        return `
+              ${element ? `<tr>` : ''}
+              <td>${id}</td>
+              <td>${titulo}</td>
+              <td>${autor}</td>
+              <td><i class="view fa fa-eye" data-toggle="modal" data-target="#modalVisualizar" data-id=${id}></i></td>
+              <td><i class="update fa fa-edit" data-toggle="modal" data-target="#modalEditar" data-id=${id}></i></td>
+              <td><i class="delete fa fa-trash " data-toggle="modal" data-id=${id}></i></td>
+              ${element ? `</tr>` : ''}
+        `;
+
+      }
 
       function read() {
-        //  lista.innerHTML = '';
+        lista.innerHTML = '';
         //chamada ajax para o servidor na rota /read
         axios.post('http://localhost:8001/job/getAll')
           .then((response) => {
             console.log(response);
-            //   response.data.forEach(element => {
-            //  lista.innerHTML += templateLi(element.id, element.name);
-            // });
+            response.data.forEach(element => {
+              lista.innerHTML += templateLista(element.id_Obra, element.titulo, element.autor);
+            });
           })
           .catch((error) => {
             console.log(error);
@@ -493,17 +502,16 @@
       function create() {
         //  const name = texto.value;
         var tipo;
-        if (document.getElementById('tipo').value == 'Livro'){
+        if (document.getElementById('tipo').value == 'Livro') {
           tipo = 1;
-        }else{
+        } else {
           tipo = 2;
         }
-
         axios.post('http://localhost:8001/job', { qtd: qtd.value, titulo: titulo.value, idGenero: '1', idTipo: tipo, autor: autor.value, descricao: descricao.value })
           .then(function (response) {
             console.log(response);
-            //  lista.innerHTML += templateLi(response.data[0], name);
-
+            // lista.innerHTML += templateLista(response.data[0], titulo.value, autor.value);
+            read();
           })
           .catch(function (error) {
             console.log(error);
@@ -511,6 +519,24 @@
       }
 
 
+      function del(element) {
+        console.log(element);
+        if (element.target.classList.contains('delete')) {
+          // id do elemento a excluir?
+          const id = element.target.dataset.id;
+          axios.delete(`http://localhost:8001/job/${id}`)
+            .then(function (response) {
+              if (response.status = 200) {
+                read();
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
+      }
+
+ 
     </script>
 
 
