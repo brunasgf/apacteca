@@ -462,6 +462,43 @@
 
     </script>
 
+
+<script>
+
+  var inputLivro = false;
+  var inputDvd = false;
+
+  function showCamposLivro() {
+
+      if (inputLivro == false) {
+          document.getElementById('dvd_inputs').style.display = 'none'
+          document.getElementById('livro_inputs').style.display = 'block';
+          inputLivro = true;
+      } else {
+          document.getElementById('livro_inputs').style.display = 'none';
+          inputLivro = false;
+      }
+
+
+  }
+
+  function showCamposDvd() {
+
+      if (inputDvd == false) {
+          document.getElementById('livro_inputs').style.display = 'none';
+          document.getElementById('dvd_inputs').style.display = 'block';
+          inputDvd = true;
+      } else {
+          document.getElementById('dvd_inputs').style.display = 'none';
+          inputDvd = false;
+      }
+
+
+  }
+
+
+
+</script>
     <script>
 
       window.onload = () => {
