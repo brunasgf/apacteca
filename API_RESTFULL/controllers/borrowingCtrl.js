@@ -69,14 +69,16 @@ class PersonController extends Queries {
                         reject(err)
                     }else{
                         const sql = `SELECT
+                            obr.id_Obra 'idObra',
                             obr.titulo 'titulo',
+                            pss.id_pessoa 'idPessoa',
                             pss.nome 'nomePessoa',
                             data_emprestimo,
                             data_devolucao 
                         FROM apacteca_db.emprestimo as emp
                         INNER JOIN obra as obr ON obr.id_Obr = emp.obra_id
                         INNER JOIN pessoa as pss ON pss.id_pessoa = emp.pessoa_id
-                        ${this.getFIlterQuery(params)} WHERE emp.data_devolucao IS NULL ORDER BY obr.titulo`
+                        ${this.getFilterQuery(params)} WHERE emp.data_devolucao IS NULL ORDER BY obr.titulo`
     
                         this.conn.query(sql, (err, result, fields)=>{
                             if(err){
@@ -99,6 +101,26 @@ class PersonController extends Queries {
         })
     }
 
+    getFilterQuery(params){
+        let query = ""
+        let keys = Object.keys(params)
+        if(keys.length){
+            query += "WHERE "
+            for(let i = 0 ; i < keys.length ; i++){
+                if(i >= 1){
+                    query += "AND "
+                }
+
+                if(keys[i] === 'nome'){
+                    query += `nome LIKE '%${params[keys[i]]}%' `
+                } else if(keys[i] === 'rg'){
+                    query += `rg LIKE '%${params[keys[i]]}%' `
+                }
+            }
+        }
+
+        return query
+    }    
 }
 
 module.exports = PersonController

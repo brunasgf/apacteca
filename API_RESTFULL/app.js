@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser')
 const express = require('express')
 const RouterJob = require("./routes/job")
+const RouterPerson = require("./routes/person")
 const Config = require('./config/config')
 
 class App {
@@ -21,6 +22,7 @@ class App {
         })
         this.app.use(bodyParser.json())
         this.routerJob = new RouterJob(this.app)
+        this.routerPerson = new RouterPerson(this.app)
     }
 }
 

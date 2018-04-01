@@ -14,7 +14,7 @@ class JobController extends Queries {
                             reject(err)
                         } else {
                             console.log(params)
-                            const sql = `INSERT INTO ${this.table} (${this.strColumns}) VALUES (${params.qtd}, "${params.titulo}", ${params.idGenero}, 1, ${params.idTipo}, "${params.autor}", "${params.descricao}")`
+                            const sql = `INSERT INTO ${this.table} (${this.strColumns}) VALUES (${params.qtd}, "${params.titulo}", ${params.idGenero}, 2, ${params.idTipo}, "${params.autor}", "${params.descricao}")`
 
                             this.conn.query(sql, (err, result) => {
                                 if (err) {
@@ -151,6 +151,46 @@ class JobController extends Queries {
 
         return query
     }    
+
+
+    update(params, id){
+        return this.createConnectionSQL()
+        .then(()=>{
+            return new Promise((resolve, reject)=>{
+                this.conn.connect((err)=>{
+                    if(err){
+                        reject(err)
+                    }else{
+                        console.log(params)
+                        const sql = `UPDATE ${this.table} SET 
+                            qtd = ${params.qtd},
+                            titulo = "${params.titulo}",
+                            genero_id = ${params.idGenero},
+                            tipo_id = ${params.idTipo},
+                            autor = "${params.autor}",
+                            descricao = "${params.descricao}"
+                        WHERE id_${this.table} = ${id}`
+    
+                        this.conn.query(sql,(err, result)=>{
+                            if(err){
+                                reject(err)
+                            }else{
+                                resolve(result)
+                            }
+                        })
+                    }
+                })
+            })
+        })
+        .then((res)=>{
+            this.conn.end()
+            return Promise.resolve(res)
+        })
+        .catch((err)=>{
+            this.conn.end()
+            return Promise.reject(err)
+        })
+    }
 }
 
 module.exports = JobController  

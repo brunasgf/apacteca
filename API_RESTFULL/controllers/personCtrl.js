@@ -46,7 +46,7 @@ class PersonController extends Queries {
                     if(err){
                         reject(err)
                     }else{
-                        const sql = `SELECT * FROM pessoa ${this.getFIlterQuery(params)} ORDER BY nome`
+                        const sql = `SELECT * FROM pessoa ${this.getFilterQuery(params)} ORDER BY nome`
                         this.conn.query(sql, (err, result, fields)=>{
                             if(err){
                                 reject(err)
@@ -68,20 +68,20 @@ class PersonController extends Queries {
         })
     }
 
-    getFIlterQuery(params){
+    getFilterQuery(params){
         let query = ""
         let keys = Object.keys(params)
         if(keys.length){
             query += "WHERE "
             for(let i = 0 ; i < keys.length ; i++){
-                if(i > 1){
+                if(i >= 1){
                     query += "AND "
                 }
 
                 if(keys[i] === 'nome'){
-                    query += `nome LIKE '%${params[keys[i]]}%'`
+                    query += `nome LIKE '%${params[keys[i]]}%' `
                 } else if(keys[i] === 'rg'){
-                    query += `rg LIKE '%${params[keys[i]]}%'`
+                    query += `rg LIKE '%${params[keys[i]]}%' `
                 }
             }
         }
@@ -89,7 +89,7 @@ class PersonController extends Queries {
         return query
     }    
 
-    getByRg(rg, columns = "*"){
+    getByRg(rg){
         return this.createConnectionSQL()
         .then(()=>{
             return new Promise((resolve, reject)=>{
@@ -97,7 +97,7 @@ class PersonController extends Queries {
                     if(err){
                         reject(err)
                     }else{
-                        const sql = `SELECT * FROM ${this.table} WHERE rg = ${rg}`
+                        const sql = `SELECT * FROM ${this.table} WHERE rg = "${rg}"`
     
                         this.conn.query(sql, (err, result, fields)=>{
                             if(err){
