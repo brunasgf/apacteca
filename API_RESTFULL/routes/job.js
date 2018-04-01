@@ -28,7 +28,7 @@ class RouteJob{
 
 		this.app.route('/job')
 		.post((req, res) => {
-			const job = new Job(req.body.qtd, req.body.titulo, req.body.idGenero, req.body.idStatus, req.body.idTipo, req.body.autor, req.body.descricao)
+			const job = new Job(req.body.qtd, req.body.titulo, req.body.idGenero, req.body.idTipo, req.body.autor, req.body.descricao)
 			return job.validateParams()
 				.then((Job)=>{
 					return this.jobController.create(Job)

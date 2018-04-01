@@ -1,5 +1,5 @@
 class Job {
-    constructor(qtd, titulo, idGenero, idStatus, idTipo, autor, descricao){
+    constructor(qtd, titulo, idGenero, idTipo, autor, descricao){
         this.qtd = qtd
         this.titulo = titulo
         this.idGenero = idGenero
