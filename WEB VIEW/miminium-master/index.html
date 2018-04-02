@@ -173,13 +173,13 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Título</label>
                       <div class="col-sm-10">
-                        <input type="text" id="titulo" class="form-control">
+                        <input type="text" id="tituloView" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Tipo</label>
                       <div class="col-sm-10">
-                        <select class="form-control" id="tipo">
+                        <select class="form-control" id="tipoView">
                           <option>Livro</option>
                           <option>DVD</option>
                         </select>
@@ -188,13 +188,13 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Autor/Diretor</label>
                       <div class="col-sm-10">
-                        <input type="text"  id="autor" class="form-control">
+                        <input type="text" id="autorView" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Gênero</label>
                       <div class="col-sm-10">
-                        <select class="form-control" id="genero">
+                        <select class="form-control" id="generoView">
                           <option>Educativo</option>
                           <option>Informática</option>
                         </select>
@@ -203,19 +203,19 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">N° de Exemplares</label>
                       <div class="col-sm-10">
-                        <input type="number"  id="quantidade" class="form-control">
+                        <input type="number" id="quantidadeView" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Status</label>
                       <div class="col-sm-10">
-                        <input type="text" id="status" class="form-control">
+                        <input type="text" id="statusView" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Descrição</label>
                       <div class="col-sm-10">
-                        <input type="text" id="descricao" class="form-control">
+                        <input type="text" id="descricaoView" class="form-control">
                       </div>
                     </div>
                   </fieldset>
@@ -252,13 +252,13 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Título</label>
                       <div class="col-sm-10">
-                        <input type="text" id="titulo" class="form-control">
+                        <input type="text" id="tituloEd" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Tipo</label>
                       <div class="col-sm-10">
-                        <select class="form-control" id="tipo">
+                        <select class="form-control" id="tipoEd">
                           <option>Livro</option>
                           <option>DVD</option>
                         </select>
@@ -267,13 +267,13 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Autor/Diretor</label>
                       <div class="col-sm-10">
-                        <input type="text" id="autor" class="form-control">
+                        <input type="text" id="autorEd" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Gênero</label>
                       <div class="col-sm-10">
-                        <select class="form-control" id="genero">
+                        <select class="form-control" id="generoEd">
                           <option>Educativo</option>
                           <option>Informática</option>
                         </select>
@@ -282,7 +282,7 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">N° de Exemplares</label>
                       <div class="col-sm-10">
-                        <input type="text" id="quantidade" class="form-control">
+                        <input type="text" id="quantidadeEd" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
@@ -294,7 +294,7 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Descrição</label>
                       <div class="col-sm-10">
-                        <input type="text" id="descricao" class="form-control">
+                        <input type="text" id="descricaoEd" class="form-control">
                       </div>
                     </div>
                   </fieldset>
@@ -303,7 +303,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-round btn-success" data-dismiss="modal">Salvar alterações</button>
+            <button type="button" id="botaoedit" class="btn btn-round btn-success" data-dismiss="modal">Salvar alterações</button>
             <button type="button" class="btn btn-round btn-primary" data-dismiss="modal">Fechar</button>
           </div>
         </div>
@@ -462,47 +462,12 @@
 
     </script>
 
-
-<script>
-
-  var inputLivro = false;
-  var inputDvd = false;
-
-  function showCamposLivro() {
-
-      if (inputLivro == false) {
-          document.getElementById('dvd_inputs').style.display = 'none'
-          document.getElementById('livro_inputs').style.display = 'block';
-          inputLivro = true;
-      } else {
-          document.getElementById('livro_inputs').style.display = 'none';
-          inputLivro = false;
-      }
-
-
-  }
-
-  function showCamposDvd() {
-
-      if (inputDvd == false) {
-          document.getElementById('livro_inputs').style.display = 'none';
-          document.getElementById('dvd_inputs').style.display = 'block';
-          inputDvd = true;
-      } else {
-          document.getElementById('dvd_inputs').style.display = 'none';
-          inputDvd = false;
-      }
-
-
-  }
-
-
-
-</script>
     <script>
 
       window.onload = () => {
         lista.addEventListener('click', del);
+        lista.addEventListener('click', edit);
+        lista.addEventListener('click', view)
         read();
 
       };
@@ -527,8 +492,8 @@
         axios.post('http://localhost:8001/job/getAll')
           .then((response) => {
             console.log(response);
-            response.data.forEach(element => {
-              lista.innerHTML += templateLista(element.id_Obra, element.titulo, element.autor);
+            response.data.data.forEach(element => {
+              lista.innerHTML += templateLista(element.id_Obra, element.titulo, element.autor, element.descricao);
             });
           })
           .catch((error) => {
@@ -573,7 +538,89 @@
         }
       }
 
- 
+      function edit(element) {
+        //  console.log();
+        const id = element.target.dataset.id;
+        // const titulo, autor, descricao, tipo, genero, qtd;
+        // console.log(id);
+        axios.get(`http://localhost:8001/job/${id}`)
+          .then((response) => {
+            console.log(response);
+            response.data.data.forEach(element => {
+
+              tituloEd.value = element.titulo;
+              tipoSelected(element.tipo, 'tipoEd');
+              autorEd.value = element.autor;
+              quantidadeEd.value = element.qtd;
+              descricaoEd.value = element.descricao;
+
+              document.getElementById("botaoedit").addEventListener('click', update(id, element.qtd, element.titulo, element.autor, element.descricao, element.tipo));
+
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+
+      function update(id, qtd, titulo, autor, descricao, tipo) {
+
+
+        if (tipo == 'Livro') {
+          tipo = 1;
+        } else {
+          tipo = 2;
+        }
+
+        axios.put(`http://localhost:8001/job/${id}`, { qtd: qtd, titulo: titulo, idGenero: '1', idStatus: '1', idTipo: tipo, autor: autor, descricao: descricao })
+          .then((response) => {
+            if (response.status = 200) {
+              read();
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+
+      function view(element) {
+        //  console.log();
+        const id = element.target.dataset.id;
+        // const titulo, autor, descricao, tipo, genero, qtd;
+        // console.log(id);
+        axios.get(`http://localhost:8001/job/${id}`)
+          .then((response) => {
+            console.log(response);
+            response.data.data.forEach(element => {
+
+              tituloView.value = element.titulo;
+              tipoSelected(element.tipo, 'tipoView');
+              autorView.value = element.autor;
+              quantidadeView.value = element.qtd;
+              descricaoView.value = element.descricao;
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+      }
+
+      function tipoSelected(tipo, id) {
+        document.getElementById(id).innerHTML = '';
+        if (tipo == 'Livro') {
+          document.getElementById(id).innerHTML +=
+            `<option selected>Livro</option>
+                <option>DVD</option>`
+        } else {
+          document.getElementById(id).innerHTML +=
+            `<option>Livro</option>
+                <option selected>DVD</option>`
+        }
+      }
+
+
+
     </script>
 
 
