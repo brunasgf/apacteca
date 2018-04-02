@@ -508,6 +508,7 @@
         axios.post('http://localhost:8001/job/getAll')
           .then((response) => {
             response.data.data.forEach(element => {
+              // console.log(response);
               lista.innerHTML += templateLista(element.id_Obra, element.titulo, element.autor, element.descricao);
             });
           })
@@ -526,7 +527,14 @@
           tipo = 2;
         }
 
-        axios.post('http://localhost:8001/job', { qtd: qtd.value, titulo: titulo.value, idGenero: genero, idTipo: tipo, autor: autor.value, descricao: descricao.value })
+        axios.post('http://localhost:8001/job', {
+          qtd: qtd.value,
+          titulo: titulo.value,
+          idGenero: genero,
+          idTipo: tipo,
+          autor: autor.value,
+          descricao: descricao.value
+        })
           .then(function (response) {
             read();
             console.log(response);
@@ -565,6 +573,7 @@
               quantidadeEd.value = element.qtd;
               descricaoEd.value = element.descricao;
               statusEd.value = element.status;
+              generoSelected(element.genero, 'generoEd');
               console.log(element.status);
             });
           })
@@ -629,6 +638,7 @@
               quantidadeView.value = element.qtd;
               descricaoView.value = element.descricao;
               statusView.value = element.status;
+              generoSelected(element.genero, 'generoView')
             });
           })
           .catch((error) => {
@@ -657,6 +667,7 @@
           return 2;
         }
       }
+
 
       function getTipoStatus(id) {
         if (id == 1) {
@@ -700,9 +711,14 @@
           return '15';
         } else if (genero == 'Novela') {
           return '16';
-        } else if (genero == 'Novela') {
+        } else if (genero == 'Outros') {
           return '17';
         }
+      }
+
+      function generoSelected(tipo, idLista) {
+        document.getElementById(idLista).innerHTML += '<option selected>' + tipo + '<option>';
+
       }
 
       function getTipoGenero(id) {
@@ -743,8 +759,6 @@
         }
       }
     </script>
-
-
     <!-- end: Javascript -->
 </body>
 
