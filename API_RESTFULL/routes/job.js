@@ -52,7 +52,7 @@ class RouteJob{
 
 		this.app.route('/job/:id')
 		.get((req, res) => {
-			this.jobController.getById(req.params.id)
+			return this.jobController.getById(req.params.id)
 			.then(response => {
 				res.status(200)
 				this.resp.sucess = true
@@ -64,7 +64,7 @@ class RouteJob{
 			})
 		})
 		.put((req, res) => {
-			const job = new Job(req.body.qtd, req.body.titulo, req.body.idGenero, req.body.idStatus, req.body.idTipo, req.body.autor, req.body.descricao)
+			const job = new Job(req.body.qtd, req.body.titulo, req.body.idGenero, req.body.idTipo, req.body.autor, req.body.descricao)
 			return job.validateParams()
 			.then((Job)=>{
 				if(req.params.id){

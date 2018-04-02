@@ -109,9 +109,6 @@
                   <thead>
                     <tr>
                       <th>
-                        #
-                      </th>
-                      <th>
                         Título da obra
                       </th>
                       <th>
@@ -127,22 +124,8 @@
                         Excluir
                       </th>
                     </tr>
-                    <tbody id="lista">
-                      <tr>
-                        <td>1</td>
-                        <td>O morro dos ventos uivantes</td>
-                        <td>não lembro</td>
-                        <td>
-                          <i class="fa fa-eye" data-toggle="modal" data-target="#modalVisualizar"></i>
-                        </td>
-                        <td>
-                          <i class="fa fa-edit" data-toggle="modal" data-target="#modalEditar"></i>
-                        </td>
-                        <td>
-                          <i class="fa fa-trash" data-toggle="modal" data-target="#modalExcluir"></i>
-                        </td>
-                      </tr>
                   </thead>
+                  <tbody id="lista">
                   </tbody>
                 </table>
               </div>
@@ -209,7 +192,7 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Status</label>
                       <div class="col-sm-10">
-                        <input type="text" id="statusView" class="form-control">
+                        <input disabled="disabled" type="text" id="statusView" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
@@ -288,7 +271,7 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Status</label>
                       <div class="col-sm-10">
-                        <input type="number" id="status" class="form-control">
+                        <input disabled="disabled" type="number" id="statusEd" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
@@ -303,7 +286,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" id="botaoedit" class="btn btn-round btn-success" data-dismiss="modal">Salvar alterações</button>
+            <button type="button" id="botaoedit" class="btn btn-round btn-success" data-dismiss="modal" onclick="update()">Salvar alterações</button>
             <button type="button" class="btn btn-round btn-primary" data-dismiss="modal">Fechar</button>
           </div>
         </div>
@@ -390,12 +373,6 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-sm-2 control-label" for="textinput">Status</label>
-                      <div class="col-sm-10">
-                        <input type="text" id="status" placeholder="Status atual da obra" class="form-control">
-                      </div>
-                    </div>
-                    <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Descrição</label>
                       <div class="col-sm-10">
                         <input type="text" id="descricao" placeholder="Descrição e/ou resumo" class="form-control">
@@ -465,22 +442,17 @@
     <script>
 
       window.onload = () => {
-        lista.addEventListener('click', del);
-        lista.addEventListener('click', edit);
-        lista.addEventListener('click', view)
         read();
-
       };
 
       function templateLista(id, titulo, autor, element = true) {
         return `
               ${element ? `<tr>` : ''}
-              <td>${id}</td>
               <td>${titulo}</td>
               <td>${autor}</td>
-              <td><i class="view fa fa-eye" data-toggle="modal" data-target="#modalVisualizar" data-id=${id}></i></td>
-              <td><i class="update fa fa-edit" data-toggle="modal" data-target="#modalEditar" data-id=${id}></i></td>
-              <td><i class="delete fa fa-trash " data-toggle="modal" data-id=${id}></i></td>
+              <td><i class="view fa fa-eye" data-toggle="modal" data-target="#modalVisualizar" onclick="view(${id})"></i></td>
+              <td><i class="update fa fa-edit" data-toggle="modal" data-target="#modalEditar" onclick="viewEdit(${id}); editId = ${id}"></i></td>
+              <td><i class="delete fa fa-trash" data-toggle="modal" onclick="del(${id})"></i></td>
               ${element ? `</tr>` : ''}
         `;
 
@@ -488,10 +460,8 @@
 
       function read() {
         lista.innerHTML = '';
-        //chamada ajax para o servidor na rota /read
         axios.post('http://localhost:8001/job/getAll')
           .then((response) => {
-            console.log(response);
             response.data.data.forEach(element => {
               lista.innerHTML += templateLista(element.id_Obra, element.titulo, element.autor, element.descricao);
             });
@@ -502,7 +472,6 @@
       }
 
       function create() {
-        //  const name = texto.value;
         var tipo;
         if (document.getElementById('tipo').value == 'Livro') {
           tipo = 1;
@@ -511,8 +480,6 @@
         }
         axios.post('http://localhost:8001/job', { qtd: qtd.value, titulo: titulo.value, idGenero: '1', idTipo: tipo, autor: autor.value, descricao: descricao.value })
           .then(function (response) {
-            console.log(response);
-            // lista.innerHTML += templateLista(response.data[0], titulo.value, autor.value);
             read();
           })
           .catch(function (error) {
@@ -521,31 +488,22 @@
       }
 
 
-      function del(element) {
-        console.log(element);
-        if (element.target.classList.contains('delete')) {
-          // id do elemento a excluir?
-          const id = element.target.dataset.id;
+      function del(id) {
           axios.delete(`http://localhost:8001/job/${id}`)
             .then(function (response) {
               if (response.status = 200) {
+                alert(response.data.message)
                 read();
               }
             })
             .catch(function (error) {
               console.log(error);
             });
-        }
       }
 
-      function edit(element) {
-        //  console.log();
-        const id = element.target.dataset.id;
-        // const titulo, autor, descricao, tipo, genero, qtd;
-        // console.log(id);
+      function viewEdit(id) {
         axios.get(`http://localhost:8001/job/${id}`)
           .then((response) => {
-            console.log(response);
             response.data.data.forEach(element => {
 
               tituloEd.value = element.titulo;
@@ -553,26 +511,32 @@
               autorEd.value = element.autor;
               quantidadeEd.value = element.qtd;
               descricaoEd.value = element.descricao;
-
-              document.getElementById("botaoedit").addEventListener('click', update(id, element.qtd, element.titulo, element.autor, element.descricao, element.tipo));
-
             });
           })
           .catch((error) => {
             console.log(error);
           });
+
       }
 
-      function update(id, qtd, titulo, autor, descricao, tipo) {
-
-
-        if (tipo == 'Livro') {
+      function update() {
+        console.log("entrei")
+        let tipo = null
+        if (tipoEd == 'Livro') {
           tipo = 1;
         } else {
           tipo = 2;
         }
 
-        axios.put(`http://localhost:8001/job/${id}`, { qtd: qtd, titulo: titulo, idGenero: '1', idStatus: '1', idTipo: tipo, autor: autor, descricao: descricao })
+        axios.put(`http://localhost:8001/job/${editId}`, { 
+          qtd: quantidadeEd.value, 
+          titulo: tituloEd.value, 
+          idGenero: '1', 
+          idStatus: '1', 
+          idTipo: tipo, 
+          autor: autorEd.value, 
+          descricao: descricaoEd.value 
+        })
           .then((response) => {
             if (response.status = 200) {
               read();
@@ -583,14 +547,9 @@
           });
       }
 
-      function view(element) {
-        //  console.log();
-        const id = element.target.dataset.id;
-        // const titulo, autor, descricao, tipo, genero, qtd;
-        // console.log(id);
+      function view(id) {
         axios.get(`http://localhost:8001/job/${id}`)
           .then((response) => {
-            console.log(response);
             response.data.data.forEach(element => {
 
               tituloView.value = element.titulo;
