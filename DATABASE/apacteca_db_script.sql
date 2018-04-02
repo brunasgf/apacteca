@@ -10,11 +10,24 @@ CREATE TABLE IF NOT EXISTS `apacteca_db`.`genero` (
   PRIMARY KEY (`id_genero`))
 ENGINE = InnoDB;
 
-INSERT INTO genero (nome) VALUES
-("Terror"),
-("Desenho Animado"),
-("Ação");
-
+INSERT INTO `genero` (`id_genero`, `nome`) VALUES
+(1, 'Terror'),
+(2, 'Infantil'),
+(3, 'Ação'),
+(4, 'Autoajuda'),
+(5, 'Biográfico'),
+(6, 'Científico'),
+(7, 'Conto'),
+(8, 'Crônicas'),
+(9, 'Épico'),
+(10, 'Fantasia'),
+(11, 'Ficção científica'),
+(12, 'Ficção histórica'),
+(13, 'Poesia'),
+(14, 'Política'),
+(15, 'Romance'),
+(16, 'Novela'),
+(17, 'Outros');
 -- -----------------------------------------------------
 -- Table `apacteca_db`.`status`
 -- -----------------------------------------------------
@@ -74,9 +87,12 @@ CREATE TABLE IF NOT EXISTS `apacteca_db`.`obra` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-INSERT INTO obra (qtd, titulo, genero_id, status_id, tipo_id, autor, descricao) VALUES 
-(100, "procurando dory", 2, 1, 1, "Andrew Stanton, Angus MacLane", 	"Um ano após ajudar Marlin a reencontrar seu filho Nemo, Dory tem um insight e lembra de sua amada família. Com saudades, ela decide fazer de tudo para reencontrá-los e acaba esbarrando com amigos do passado e vai parar nas perigosas mãos de humanos.");
 
+INSERT INTO `obra` (`id_Obra`, `qtd`, `titulo`, `genero_id`, `status_id`, `tipo_id`, `autor`, `descricao`) VALUES
+(20, 5, 'O Alquimista', 10, 2, 1, 'Paulo Coelho', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '),
+(21, 2, 'Como Vejo o Mundo', 5, 2, 1, 'Albert Einstein', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '),
+(22, 1, 'Mr. Mercedes', 1, 2, 1, 'Stephen King', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '),
+(23, 4, 'A Lagoa Azul', 15, 2, 2, 'Randal Kleiser', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ');
 -- -----------------------------------------------------
 -- Table `apacteca_db`.`pessoa`
 -- -----------------------------------------------------
