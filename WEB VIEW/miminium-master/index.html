@@ -156,13 +156,13 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Título</label>
                       <div class="col-sm-10">
-                        <input type="text" id="tituloView" class="form-control">
+                        <input disabled="disabled" type="text" id="tituloView" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Tipo</label>
                       <div class="col-sm-10">
-                        <select class="form-control" id="tipoView">
+                        <select disabled="disabled" class="form-control" id="tipoView">
                           <option>Livro</option>
                           <option>DVD</option>
                         </select>
@@ -171,22 +171,37 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Autor/Diretor</label>
                       <div class="col-sm-10">
-                        <input type="text" id="autorView" class="form-control">
+                        <input disabled="disabled" type="text" id="autorView" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Gênero</label>
                       <div class="col-sm-10">
-                        <select class="form-control" id="generoView">
-                          <option>Educativo</option>
-                          <option>Informática</option>
+                        <select disabled="disabled" class="form-control" id="generoView">
+                          <option>Ação</option>
+                          <option>Autoajuda</option>
+                          <option>Biográfico</option>
+                          <option>Científico</option>
+                          <option>Conto</option>
+                          <option>Crônicas</option>
+                          <option>Épico</option>
+                          <option>Fantasia</option>
+                          <option>Ficção científica</option>
+                          <option>Ficção histórica</option>
+                          <option>Infantil</option>
+                          <option>Novela</option>
+                          <option>Poesia</option>
+                          <option>Política</option>
+                          <option>Romance</option>
+                          <option>Terror</option>
+                          <option>Outros</option>
                         </select>
                       </div>
                     </div>
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">N° de Exemplares</label>
                       <div class="col-sm-10">
-                        <input type="number" id="quantidadeView" class="form-control">
+                        <input disabled="disabled" type="number" id="quantidadeView" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
@@ -198,7 +213,7 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Descrição</label>
                       <div class="col-sm-10">
-                        <input type="text" id="descricaoView" class="form-control">
+                        <input disabled="disabled" type="text" id="descricaoView" class="form-control">
                       </div>
                     </div>
                   </fieldset>
@@ -222,7 +237,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Visualizar Obra</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">Editar Obra</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -257,8 +272,23 @@
                       <label class="col-sm-2 control-label" for="textinput">Gênero</label>
                       <div class="col-sm-10">
                         <select class="form-control" id="generoEd">
-                          <option>Educativo</option>
-                          <option>Informática</option>
+                          <option>Ação</option>
+                          <option>Autoajuda</option>
+                          <option>Biográfico</option>
+                          <option>Científico</option>
+                          <option>Conto</option>
+                          <option>Crônicas</option>
+                          <option>Épico</option>
+                          <option>Fantasia</option>
+                          <option>Ficção científica</option>
+                          <option>Ficção histórica</option>
+                          <option>Infantil</option>
+                          <option>Novela</option>
+                          <option>Poesia</option>
+                          <option>Política</option>
+                          <option>Romance</option>
+                          <option>Terror</option>
+                          <option>Outros</option>
                         </select>
                       </div>
                     </div>
@@ -271,7 +301,7 @@
                     <div class="form-group">
                       <label class="col-sm-2 control-label" for="textinput">Status</label>
                       <div class="col-sm-10">
-                        <input disabled="disabled" type="number" id="statusEd" class="form-control">
+                        <input disabled="disabled" type="text" id="statusEd" class="form-control">
                       </div>
                     </div>
                     <div class="form-group">
@@ -361,8 +391,23 @@
                       <label class="col-sm-2 control-label" for="textinput">Gênero</label>
                       <div class="col-sm-10">
                         <select class="form-control" id="genero">
-                          <option>Educativo</option>
-                          <option>Informática</option>
+                          <option>Ação</option>
+                          <option>Autoajuda</option>
+                          <option>Biográfico</option>
+                          <option>Científico</option>
+                          <option>Conto</option>
+                          <option>Crônicas</option>
+                          <option>Épico</option>
+                          <option>Fantasia</option>
+                          <option>Ficção científica</option>
+                          <option>Ficção histórica</option>
+                          <option>Infantil</option>
+                          <option>Novela</option>
+                          <option>Poesia</option>
+                          <option>Política</option>
+                          <option>Romance</option>
+                          <option>Terror</option>
+                          <option>Outros</option>
                         </select>
                       </div>
                     </div>
@@ -473,14 +518,22 @@
 
       function create() {
         var tipo;
+        var genero = getIdGenero(document.getElementById('genero').value);
+
         if (document.getElementById('tipo').value == 'Livro') {
           tipo = 1;
         } else {
           tipo = 2;
         }
-        axios.post('http://localhost:8001/job', { qtd: qtd.value, titulo: titulo.value, idGenero: '1', idTipo: tipo, autor: autor.value, descricao: descricao.value })
+
+        axios.post('http://localhost:8001/job', { qtd: qtd.value, titulo: titulo.value, idGenero: genero, idTipo: tipo, autor: autor.value, descricao: descricao.value })
           .then(function (response) {
             read();
+            console.log(response);
+            qtd.value = '';
+            titulo.value = '';
+            autor.value = '';
+            descricao.value = '';
           })
           .catch(function (error) {
             console.log(error);
@@ -489,16 +542,16 @@
 
 
       function del(id) {
-          axios.delete(`http://localhost:8001/job/${id}`)
-            .then(function (response) {
-              if (response.status = 200) {
-                alert(response.data.message)
-                read();
-              }
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
+        axios.delete(`http://localhost:8001/job/${id}`)
+          .then(function (response) {
+            if (response.status = 200) {
+              alert(response.data.message)
+              read();
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       }
 
       function viewEdit(id) {
@@ -511,6 +564,8 @@
               autorEd.value = element.autor;
               quantidadeEd.value = element.qtd;
               descricaoEd.value = element.descricao;
+              statusEd.value = element.status;
+              console.log(element.status);
             });
           })
           .catch((error) => {
@@ -528,23 +583,39 @@
           tipo = 2;
         }
 
-        axios.put(`http://localhost:8001/job/${editId}`, { 
-          qtd: quantidadeEd.value, 
-          titulo: tituloEd.value, 
-          idGenero: '1', 
-          idStatus: '1', 
-          idTipo: tipo, 
-          autor: autorEd.value, 
-          descricao: descricaoEd.value 
-        })
+        var status;
+        var genero;
+
+        axios.get(`http://localhost:8001/job/${editId}`)
           .then((response) => {
-            if (response.status = 200) {
-              read();
-            }
+            response.data.data.forEach(element => {
+              status = element.status;
+              genero = getIdGenero(element.genero);
+              console.log(genero);
+
+              axios.put(`http://localhost:8001/job/${editId}`, {
+                qtd: quantidadeEd.value,
+                titulo: tituloEd.value,
+                idGenero: genero,
+                idTipo: tipo,
+                autor: autorEd.value,
+                descricao: descricaoEd.value
+              })
+                .then((response) => {
+                  if (response.status = 200) {
+                    read();
+                  }
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+            });
           })
-          .catch(function (error) {
+          .catch((error) => {
             console.log(error);
           });
+
+
       }
 
       function view(id) {
@@ -557,6 +628,7 @@
               autorView.value = element.autor;
               quantidadeView.value = element.qtd;
               descricaoView.value = element.descricao;
+              statusView.value = element.status;
             });
           })
           .catch((error) => {
@@ -578,8 +650,98 @@
         }
       }
 
+      function getIdStatus(status) {
+        if (status == 'Livre') {
+          return 1;
+        } else {
+          return 2;
+        }
+      }
 
+      function getTipoStatus(id) {
+        if (id == 1) {
+          return 'Livre';
 
+        } else {
+          return 'Emprestado';
+        }
+      }
+
+      function getIdGenero(genero) {
+        if (genero == 'Terror') {
+          return '1';
+        } else if (genero == 'Infantil') {
+          return '2';
+        } else if (genero == 'Ação') {
+          return '3';
+        } else if (genero == 'Autoajuda') {
+          return '4';
+        } else if (genero == 'Biográfico') {
+          return '5';
+        } else if (genero == 'Científico') {
+          return '6';
+        } else if (genero == 'Conto') {
+          return '7';
+        } else if (genero == 'Crônicas') {
+          return '8';
+        } else if (genero == 'Épico') {
+          return '9';
+        } else if (genero == 'Fantasia') {
+          return '10';
+        } else if (genero == 'Ficção científica') {
+          return '11';
+        } else if (genero == 'Ficção histórica') {
+          return '12';
+        } else if (genero == 'Poesia') {
+          return '13';
+        } else if (genero == 'Política') {
+          return '14';
+        } else if (genero == 'Romance') {
+          return '15';
+        } else if (genero == 'Novela') {
+          return '16';
+        } else if (genero == 'Novela') {
+          return '17';
+        }
+      }
+
+      function getTipoGenero(id) {
+        if (id == 1) {
+          return 'Terror';
+        } else if (id == 2) {
+          return 'Infantil';
+        } else if (id == 3) {
+          return 'Ação';
+        } else if (id == 4) {
+          return 'Autoajuda';
+        } else if (id == 5) {
+          return 'Biográfico';
+        } else if (id == 6) {
+          return 'Científico';
+        } else if (id == 7) {
+          return 'Conto';
+        } else if (id == 8) {
+          return 'Crônicas';
+        } else if (id == 9) {
+          return 'Épico';
+        } else if (id == 10) {
+          return 'Fantasia';
+        } else if (id == 11) {
+          return 'Ficção científica';
+        } else if (id == 12) {
+          return 'Ficção histórica';
+        } else if (id == 13) {
+          return 'Poesia';
+        } else if (id == 14) {
+          return 'Política';
+        } else if (id == 15) {
+          return 'Romance';
+        } else if (id == 16) {
+          return 'Novela';
+        } else if (id == 17) {
+          return 'Outros';
+        }
+      }
     </script>
 
 
