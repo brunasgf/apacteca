@@ -84,10 +84,23 @@
             </div>
             <div class="panel-body">
               <div class="responsive-table">
+                <label>Nome:     </label> 
+                  <input type="text" class="input-sm" placeholder=".input-sm">
+                  <label>Título obra:     </label> 
+                  <input type="text" class="input-sm" placeholder=".input-sm">
+
+
+
+
+
+                </br> </br> </br> 
                 <div class="text-right">
-                  <input type="button" data-toggle="modal" data-target="#modalAdicionar" class=" btn btn-round btn-success" value="Adicionar obra"
+                  <input type="button" data-toggle="modal" data-target="#modalEmprestar" class=" btn btn-round btn-danger" value="Realizar Devolução"
                   />
+                  <input type="button" data-toggle="modal" data-target="#modalDevolver" class=" btn btn-round btn-success" value="Novo Empréstimo" </>
                 </div>
+               
+              </br> 
                 <table class="table" id='myTable'>
                   <thead>
                     <tr>
@@ -95,35 +108,34 @@
                         #
                       </th>
                       <th>
-                        Título da obra
+                        Obra em emprétimo
                       </th>
                       <th>
-                        Autor/Diretor
+                          Tipo
+                        </th>
+                      <th>
+                        Nome
                       </th>
                       <th>
-                        Visualizar
+                      Data de empréstimo
                       </th>
                       <th>
-                        Editar
-                      </th>
-                      <th>
-                        Excluir
+                       Data de devolução 
                       </th>
                     </tr>
                     <tbody id="lista">
                       <tr>
                         <td>1</td>
                         <td>O morro dos ventos uivantes</td>
-                        <td>não lembro</td>
+                        <td>Livro</td>
+                        <td>Fulano Fulanin</td>
                         <td>
-                          <i class="fa fa-eye" data-toggle="modal" data-target="#modalVisualizar"></i>
+                          25/02/2018
                         </td>
                         <td>
-                          <i class="fa fa-edit" data-toggle="modal" data-target="#modalEditar"></i>
+                          -
                         </td>
-                        <td>
-                          <i class="fa fa-trash" data-toggle="modal" data-target="#modalExcluir"></i>
-                        </td>
+                        
                       </tr>
                   </thead>
                   </tbody>
