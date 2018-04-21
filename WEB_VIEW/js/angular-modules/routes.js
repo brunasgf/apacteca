@@ -9,7 +9,7 @@ roures.config(($routeProvider) => {
             templateUrl: "views/emprestimo.html"
         })
         .when("/obras", {
-            templateUrl: "views/obras.html"
+            templateUrl: "views/obras/index.html"
         })
         .when("/pessoas", {
             templateUrl: "views/pessoas.html"

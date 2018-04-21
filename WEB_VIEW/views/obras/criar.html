@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-12">
+        <h1 class="main-title">Criar Nova Obra</h1>
+    </div>
+
+    <div class="col-7 form-group">
+        <label>Título</label>
+        <input type="text" class="form-control">
+    </div>
+
+    <div class="col-5 form-group">
+        <label>Tipo</label>
+        <select class="form-control">
+            <option>Livro</option>
+            <option>DVD</option>
+        </select>
+    </div>
+
+    <div class="col-5 form-group">
+        <label>Autor/Diretor</label>
+        <input type="text" class="form-control">
+    </div>
+
+    <div class="col-4 form-group">
+        <label>Gênero</label>
+        <select class="form-control">
+            <option>Ação</option>
+            <option>Autoajuda</option>
+            <option>Biográfico</option>
+            <option>Científico</option>
+            <option>Conto</option>
+            <option>Crônicas</option>
+            <option>Épico</option>
+            <option>Fantasia</option>
+            <option>Ficção científica</option>
+            <option>Ficção histórica</option>
+            <option>Infantil</option>
+            <option>Novela</option>
+            <option>Poesia</option>
+            <option>Política</option>
+            <option>Romance</option>
+            <option>Terror</option>
+            <option>Outros</option>
+        </select>
+    </div>
+
+    <div class="col-3 form-group">
+        <label>N° de Exemplares</label>
+        <input type="text" class="form-control">
+    </div>
+
+    <div class="col-12 form-group">
+        <label>Descrição</label>
+        <textarea class="form-control" rows="4s"></textarea>
+    </div>
+
+    <div class="col-6"></div>
+
+    <div class="col-12 text-right">
+        <button class="btn btn-gray btn-round" ng-click="closeThisDialog(false)">
+            Cancelar
+        </button>
+        <button class="btn btn-success btn-round" ng-click="closeThisDialog()">
+            Adicionar
+        </button>
+    </div>
+</div>

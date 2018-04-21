@@ -1,88 +1,93 @@
 <!DOCTYPE html>
 <html lang="pt-br" ng-app="apacteca">
 
-	<head>
-		<meta charset="utf-8">
-		<meta name="description" content="Miminium Admin Template v.1">
-		<meta name="author" content="Isna Nur Azis">
-		<meta name="keyword" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Biblioteca e DVDteca</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Miminium Admin Template v.1">
+        <meta name="author" content="Isna Nur Azis">
+        <meta name="keyword" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Biblioteca e DVDteca</title>
 
-		<link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-		<link href="./node_modules/bootstrap/dist/css/bootstrap-grid.min.css" rel="stylesheet">
-		<link href="./node_modules/bootstrap/dist/css/bootstrap-grid.min.css" rel="stylesheet">
-		<link href="./node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-		<link href="./node_modules/ng-dialog/css/ngDialog-theme-default.min.css" rel="stylesheet">
-		<link href="./node_modules/ng-dialog/css/ngDialog-custom-width.css" rel="stylesheet">
-		<link href="./node_modules/ng-dialog/css/ngDialog-theme-plain.min.css" rel="stylesheet">
-		<link href="./node_modules/ng-dialog/css/ngDialog.min.css" rel="stylesheet">
-		<link href="./css/style.css" rel="stylesheet">
-		<link href="./img/logomi.png" rel="shortcut icon">
+        <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./node_modules/bootstrap/dist/css/bootstrap-grid.min.css" rel="stylesheet">
+        <link href="./node_modules/bootstrap/dist/css/bootstrap-grid.min.css" rel="stylesheet">
+        <link href="./node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="./node_modules/ng-dialog/css/ngDialog-theme-default.min.css" rel="stylesheet">
+        <link href="./node_modules/ng-dialog/css/ngDialog-custom-width.css" rel="stylesheet">
+        <link href="./node_modules/ng-dialog/css/ngDialog-theme-plain.min.css" rel="stylesheet">
+        <link href="./node_modules/ng-dialog/css/ngDialog.min.css" rel="stylesheet">
+        <link href="./css/style.css" rel="stylesheet">
+        <link href="./img/logomi.png" rel="shortcut icon">
 
-		<script src="./node_modules/bluebird/js/browser/bluebird.min.js"></script>
-		<script src="./node_modules/bluebird/js/browser/bluebird.core.min.js"></script>
+        <script src="./node_modules/bluebird/js/browser/bluebird.min.js"></script>
+        <script src="./node_modules/bluebird/js/browser/bluebird.core.min.js"></script>
 
-		<script src="./node_modules/angular/angular.min.js"></script>
-		<script src="./node_modules/angular-route/angular-route.min.js"></script>
-		<script src="./node_modules/ng-dialog/js/ngDialog.min.js"></script>
+        <script src="./node_modules/angular/angular.min.js"></script>
+        <script src="./node_modules/angular-route/angular-route.min.js"></script>
+        <script src="./node_modules/ng-dialog/js/ngDialog.min.js"></script>
 
-		<script src="./node_modules/angular-bluebird-promises/dist/angular-bluebird-promises.min.js"></script>
+        <script src="./node_modules/angular-bluebird-promises/dist/angular-bluebird-promises.min.js"></script>
 
-		<script src="./js/app.js"></script>
-		<script src="./js/angular-modules/routes.js"></script>
+        <script src="./js/app.js"></script>
+        <script src="./js/angular-modules/routes.js"></script>
+        <script src="./js/angular-modules/services/notify.js"></script>
+        <script src="./js/angular-modules/services/webService.js"></script>
+        <script src="./js/angular-modules/controllers/ObraCtrl.js"></script>
 
-	</head>
+    </head>
 
-	<body id="mimin" class="dashboard">
-		<nav class="navbar navbar-default header navbar-fixed-top">
-			<div class="col-md-12 nav-wrapper">
-				<div class="navbar-header" style="width:100%;">
-					<div class="opener-left-menu is-open">
-						<span class="top"></span>
-						<span class="middle"></span>
-						<span class="bottom"></span>
-					</div>
-					<a href="index.html" class="navbar-brand">
-						<b>APAC</b>
-					</a>
-				</div>
-			</div>
-		</nav>
+    <body id="mimin" class="dashboard">
+        <nav class="navbar navbar-default header navbar-fixed-top">
+            <div class="col-md-12 nav-wrapper">
+                <div class="navbar-header" style="width:100%;">
+                    <div class="opener-left-menu is-open">
+                        <span class="top"></span>
+                        <span class="middle"></span>
+                        <span class="bottom"></span>
+                    </div>
+                    <a href="index.html" class="navbar-brand">
+                        <b>APAC</b>
+                    </a>
+                </div>
+            </div>
+        </nav>
 
-		<div class="container-fluid mimin-wrapper">
-			<div id="left-menu">
-				<div class="sub-left-menu scroll">
-					<ul class="nav nav-list">
-						<li class="ripple">
-							<div class="left-bg"></div>
-						</li>
-						<li class="ripple">
-							<a class="ml-3 tsree-toggle nav-header" href="#!/emprestimos">
-								<span class="fa fa-exchange"></span> Empréstimo
-							</a>
-						</li>
-						<li class="ripple">
-							<a class="ml-3 tree-toggle nav-header" href="#!/obras">
-								<span class="fa fa-book"></span> Acervo
-							</a>
-						</li>
-						<li class=" ripple">
-							<a class="ml-3 tree-toggle nav-header" href="#!/pessoas">
-								<span class="fa-user fa"></span> Pessoas
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+        <div class="container-fluid mimin-wrapper">
+            <div id="left-menu">
+                <div class="sub-left-menu scroll">
+                    <ul class="nav nav-list">
+                        <li class="ripple">
+                            <div class="left-bg"></div>
+                        </li>
+                        <li class="ripple">
+                            <a class="ml-3 tsree-toggle nav-header" href="#!/emprestimos">
+                                <span class="fa fa-exchange"></span> Empréstimo
+                            </a>
+                        </li>
+                        <li class="ripple">
+                            <a class="ml-3 tree-toggle nav-header" href="#!/obras">
+                                <span class="fa fa-book"></span> Acervo
+                            </a>
+                        </li>
+                        <li class=" ripple">
+                            <a class="ml-3 tree-toggle nav-header" href="#!/pessoas">
+                                <span class="fa-user fa"></span> Pessoas
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-		<div ng-view class="content"></div>
+        <div class="content panel">
+            <div ng-view class="ml-4"></div>
+        </div>
 
-		<script src="./js/jquery.min.js"></script>
-		<script src="./js/main.js"></script>
-		<script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	</body>
+        <script src="./js/jquery.min.js"></script>
+        <script src="./js/main.js"></script>
+        <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 
 </html>

@@ -1,7 +1,7 @@
 body {
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 13px;
-  background-color:#f0f3f4;
+  background-color:#FFF;
   line-height: 1.42857143 !important;
   color: #58666e !important;
 }
@@ -36,25 +36,6 @@ audio {
 
 code {text-align: left !important;}
 
-input[type='text'] {
-  border: 1px solid #ddd;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  -ms-border-radius: 0px;
-  -o-border-radius: 0px;
-  border-radius: 0px;
-  padding: 10px;
-  border-radius: 0px !important;
-}
-
-select{
-  border-radius: 0px !important;
-  border:1px solid #ddd;
-  padding: 7px;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
 label{ font-weight:400; }
 
 
@@ -62,7 +43,7 @@ th { border-bottom: none !important; }
 
 td {
   padding: 10px !important;
-  border:1px solid #f4f4f4 !important;
+  border:1px solid #d1d1d1 !important;
 }
 
 ul li{
@@ -6473,4 +6454,38 @@ ul li a:focus {
 .content {
   margin-left: 15%;
   padding: 1%;
+}
+
+.buttn-sm {
+  padding: 0px 15px 0px 15px;
+  margin: 0px;
+}
+
+.wid-100 {
+  max-width: 100px;
+  width: 100px;
+}
+
+.sub-title{
+    font-size: 20px;
+    letter-spacing: -1px;
+    color: #3483d3;
+}
+
+.atencoius-text {
+    padding: 23px 0px 35px 40px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.main-title{
+    font-size: 29px;
+    letter-spacing: -2px;
+    color: #3c7dbe;
+    font-weight: 300;
+}
+
+.btn-gray {
+    background-color: #d5d4d4;
+    border-color: #d5d4d4;
 }
