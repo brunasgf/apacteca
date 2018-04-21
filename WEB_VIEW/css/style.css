@@ -2669,25 +2669,6 @@ ul li a:focus {
   color: #918C8C;
 }
 
-
-.input-group-addon,
-.user-photo,
-.btn,
-.cover-v1,
-.nav-tabs.nav-tabs-v2,
-.tabs-area,
-.mail-wrapper,
-.mail-reply,
-.panel,
-.thumbnail,
-.navbar{
-  -webkit-box-shadow: 0 1px 0px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
-  -moz-box-shadow: 0 1px 0px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
-  -ms-box-shadow: 0 1px 0px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
-  -o-box-shadow: 0 1px 0px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
-  box-shadow: 0 1px 0px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.24);
-}
-
 /*start: box v-1*/
   .box-v1 .panel-body{padding-top: 40px;}
     .box-v1 .panel-body h1{line-height: .5;}
