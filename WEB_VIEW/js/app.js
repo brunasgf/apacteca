@@ -1,4 +1,6 @@
 const app = angular.module('apacteca', [
     'ngRoute',
-    'ngDialog'
+    'ngDialog',
+    'ngAnimate',
+    'toastr'
 ])

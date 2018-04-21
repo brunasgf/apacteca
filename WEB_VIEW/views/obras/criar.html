@@ -1,16 +1,16 @@
-<div class="row">
+<div class="row" ng-controller="ObraCtrl">
     <div class="col-12">
         <h1 class="main-title">Criar Nova Obra</h1>
     </div>
 
     <div class="col-7 form-group">
         <label>Título</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" ng-model="obra.titulo">
     </div>
 
     <div class="col-5 form-group">
         <label>Tipo</label>
-        <select class="form-control">
+        <select class="form-control" ng-model="obra.idTipo">
             <option>Livro</option>
             <option>DVD</option>
         </select>
@@ -18,12 +18,12 @@
 
     <div class="col-5 form-group">
         <label>Autor/Diretor</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" ng-model="obra.autor">
     </div>
 
     <div class="col-4 form-group">
         <label>Gênero</label>
-        <select class="form-control">
+        <select class="form-control" ng-model="obra.idGenero">
             <option>Ação</option>
             <option>Autoajuda</option>
             <option>Biográfico</option>
@@ -46,21 +46,22 @@
 
     <div class="col-3 form-group">
         <label>N° de Exemplares</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" ng-model="obra.qtd">
     </div>
 
     <div class="col-12 form-group">
         <label>Descrição</label>
-        <textarea class="form-control" rows="4s"></textarea>
+        <textarea class="form-control" ng-model="obra.descricao" rows="4"></textarea>
     </div>
 
     <div class="col-6"></div>
 
     <div class="col-12 text-right">
-        <button class="btn btn-gray btn-round" ng-click="closeThisDialog(false)">
+        <button class="btn btn-danger btn-round" ng-click="closeThisDialog(false)">
             Cancelar
         </button>
-        <button class="btn btn-success btn-round" ng-click="closeThisDialog()">
+
+        <button class="btn btn-success btn-round" ng-click="adicionarObra(obra)">
             Adicionar
         </button>
     </div>

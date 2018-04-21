@@ -8,9 +8,9 @@
   "license": "ISC",
   "dependencies": {
     "angular": "^1.6.9",
-    "angular-bluebird-promises": "^1.0.2",
+    "angular-animate": "^1.6.10",
     "angular-route": "^1.6.9",
-    "bluebird": "^3.5.1",
+    "angular-toastr": "^2.1.1",
     "bootstrap": "^4.1.0",
     "express": "^4.14.0",
     "font-awesome": "^4.7.0",
