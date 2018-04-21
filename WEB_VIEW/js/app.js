@@ -1,4 +1,4 @@
-const app = angular.module('apacteca' ,[
+const app = angular.module('apacteca', [
     'ngRoute',
     'ngDialog'
 ])

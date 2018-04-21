@@ -8,6 +8,7 @@
   "license": "ISC",
   "dependencies": {
     "angular": "^1.6.9",
+    "angular-bluebird-promises": "^1.0.2",
     "angular-route": "^1.6.9",
     "bluebird": "^3.5.1",
     "bootstrap": "^4.1.0",
