@@ -1,0 +1,56 @@
+<div class="row" ng-controller="PessoaCtrl" ng-init="getTodasPessoas()">
+    <div class="col-12">
+        <div class="row mb-4">
+            <div class="col-6">
+                <h3>Pessoas Cadastradas</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <label>Nome</label>
+                <input class="form-control" type="text" ng-model="filtro.nome" placeholder="digite um Nome. Exemplo: Jose maria">
+            </div>
+
+            <div class="col-4">
+                <label>RG</label>
+                <input class="form-control" type="text" ng-model="filtro.rg" placeholder="digite um rg. Exemplo:18378490">
+            </div>
+
+            <div class="col-4 form-group">
+                <button class="btn btn-search btn-block btn-round hasLabel" ng-click="getTodasPessoas()">Pesquisar</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <h3 class="sub-title">Lista de Pessoas</h3>
+            </div>
+            <div class="col-12">
+                <table class="table table-hover table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Número de Identidade</th>
+                            <th class="text-center wid-200">Historico de Emprestimos</th>
+                        </tr>
+                        <tbody>
+                            <tr ng-repeat="pessoa in listaPessoas">
+                                <td>{{pessoa.nome}}</td>
+                                <td>{{pessoa.rg}}</td>
+                                <td class="text-center wid-200">
+                                    <button class="btn btn-info buttn-sm btn-round" ng-click="openModalHistorico(pessoa)">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr ng-if="!listaPessoas.length">
+                                <td colspan="3">Nenhuma pessoa encontrada</td>
+                            </tr>
+                        </tbody>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

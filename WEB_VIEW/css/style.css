@@ -6443,6 +6443,11 @@ ul li a:focus {
   width: 100px;
 }
 
+.wid-200 {
+  max-width: 200px;
+  width: 200px;
+}
+
 .sub-title{
     font-size: 20px;
     letter-spacing: -1px;

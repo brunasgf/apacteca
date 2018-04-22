@@ -6,13 +6,13 @@ roures.config(($routeProvider) => {
             templateUrl: "views/home.html"
         })
         .when("/emprestimos", {
-            templateUrl: "views/emprestimo.html"
+            templateUrl: "views/emprestimo/index.html"
         })
         .when("/obras", {
             templateUrl: "views/obras/index.html"
         })
         .when("/pessoas", {
-            templateUrl: "views/pessoas.html"
+            templateUrl: "views/pessoa/index.html"
         })
         .otherwise({
             templateUrl: "views/home.html"

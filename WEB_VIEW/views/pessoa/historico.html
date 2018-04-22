@@ -1,0 +1,43 @@
+<div class="row" ng-controller="PessoaCtrl" ng-init="getHistoricoPessoa(ngDialogData.pessoa.id_pessoa)">
+    <div class="col-6">
+        <h1 class="main-title">Historico de: {{ngDialogData.pessoa.nome}}</h1>
+    </div>
+
+    <div class="col-6 text-right">
+        <span class="p-2 mr-2 badge badge-pill badge-info">
+            RG: {{ngDialogData.pessoa.rg}}
+        </span>
+    </div>
+
+    <div class="col-12">
+        <h3 class="sub-title">Lista de Obras</h3>
+    </div>
+
+    <div class="col-12">
+        <table class="table table-hover table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Data Emprestimo</th>
+                    <th>Data Devolução</th>
+                    <th>Titulo da obra</th>
+                </tr>
+                <tbody>
+                    <tr ng-repeat="hist in historico">
+                        <td>{{getFormatedData(hist.dataEmprestimo)}}</td>
+                        <td>{{ (hist.dataDevolucao) ? getFormatedData(hist.dataDevolucao) : '-' }}</td>
+                        <td>{{hist.titulo}}</td>
+                    </tr>
+                    <tr ng-if="!historico.length">
+                        <td colspan="3">Nenhum Historico encontrado</td>
+                    </tr>
+                </tbody>
+            </thead>
+        </table>
+    </div>
+
+    <div class="col-12 text-right">
+        <button class="btn btn-danger btn-round" ng-click="closeThisDialog(false)">
+            Cancelar
+        </button>
+    </div>
+</div>

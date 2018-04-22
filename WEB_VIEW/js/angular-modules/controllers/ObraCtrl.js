@@ -1,7 +1,7 @@
 const ObraCTrl = angular.module('apacteca')
 
-ObraCTrl.controller('ObraCtrl', ['$scope', 'Notify', 'Obra', 'toastr', 'Listas', '$filter',
-    ($scope, Notify, Obra, toastr, Listas, $filter) => {
+ObraCTrl.controller('ObraCtrl', ['$scope', 'Notify', 'Obra', 'toastr', 'Listas',
+    ($scope, Notify, Obra, toastr, Listas) => {
 
         $scope.obra = {
             titulo: null,
