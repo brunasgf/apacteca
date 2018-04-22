@@ -1,5 +1,6 @@
 const Queries = require("./queriesCtrl")
 const PessoaCtrl = require("./personCtrl")
+const JobCtrl = require("./jobCtrl")
 const Pessoa = require("../models/person")
 const Moment = require("moment")
 
@@ -85,6 +86,10 @@ class borrowController extends Queries {
                 const pessoaCtrl = new PessoaCtrl()
                 return pessoaCtrl.updateEmprestimoData(idPessoaAtual, now)
             })
+            .then(() => {
+                const jobCtrl = new JobCtrl()
+                return jobCtrl.modifyQtdActual(params.idObra, 'decrement')
+            })
             .then((res) => {
                 this.conn.end()
                 return Promise.resolve(res)
@@ -133,6 +138,48 @@ class borrowController extends Queries {
             })
             .catch((err) => {
                 this.conn.end()
+                return Promise.reject(err)
+            })
+    }
+
+    replaceBook(idBorrow) {
+        return this.getById(idBorrow)
+            .then((res) => {
+                if (res && res.length && res[0].data_devolucao) {
+                    const error = {}
+                    error.statusCode = 400
+                    error.message = "Essa Obra já foi devolvida"
+                    return Promise.reject(error)
+                } else {
+                    return this.createConnectionSQL()
+                }
+            })
+            .then(() => {
+                return new Promise((resolve, reject) => {
+                    this.conn.connect((err) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            const sql = `UPDATE emprestimo SET data_devolucao = ${Moment().valueOf()} WHERE idemprestimo = ${idBorrow}`
+                            this.conn.query(sql, (err, result, fields) => {
+                                if (err) {
+                                    reject(err)
+                                } else {
+                                    resolve(result)
+                                }
+                            })
+                        }
+                    })
+                })
+            })
+            .then((res) => {
+                return this.getById(idBorrow)
+            })
+            .then((res) => {
+                const jobCtrl = new JobCtrl()
+                return jobCtrl.modifyQtdActual(res[0].obra_id, 'increment')
+            })
+            .catch((err) => {
                 return Promise.reject(err)
             })
     }

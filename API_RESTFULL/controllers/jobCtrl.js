@@ -2,7 +2,7 @@ const Queries = require("./queriesCtrl")
 
 class JobController extends Queries {
     constructor() {
-        super("obra", ['qtd', 'titulo', 'genero_id', 'status_id', 'tipo_id', 'autor', 'descricao'])
+        super("obra", ['qtd_total', 'titulo', 'genero_id', 'status_id', 'tipo_id', 'autor', 'descricao', 'qtd_atual'])
     }
 
     create(params) {
@@ -14,7 +14,7 @@ class JobController extends Queries {
                             reject(err)
                         } else {
                             console.log(params)
-                            const sql = `INSERT INTO ${this.table} (${this.strColumns}) VALUES (${params.qtd}, "${params.titulo}", ${params.idGenero}, 2, ${params.idTipo}, "${params.autor}", "${params.descricao}")`
+                            const sql = `INSERT INTO ${this.table} (${this.strColumns}) VALUES (${params.qtd}, "${params.titulo}", ${params.idGenero}, 2, ${params.idTipo}, "${params.autor}", "${params.descricao}", ${params.qtd})`
 
                             this.conn.query(sql, (err, result) => {
                                 if (err) {
@@ -94,12 +94,13 @@ class JobController extends Queries {
                         } else {
 
                             const sql = `SELECT id_Obra,
-                            qtd,
+                            qtd_total,
                             titulo,
                             gen.nome 'genero',
                             sta.nome 'status',
                             tip.nome 'tipo',
                             autor,
+                            qtd_atual,
                             descricao
                         FROM apacteca_db.obra as obr
                         INNER JOIN genero as gen ON gen.id_genero = obr.genero_id
@@ -123,6 +124,7 @@ class JobController extends Queries {
                 return Promise.resolve(res)
             })
             .catch((err) => {
+                console.log(err)
                 this.conn.end()
                 return Promise.reject(err)
             })
@@ -154,24 +156,74 @@ class JobController extends Queries {
         return resp
     }
 
-
     update(params, id) {
-        return this.createConnectionSQL()
+        let qtd_atual_antiga = null
+        let qtd_total_antiga = null
+        return this.getById(id)
+            .then((res) => {
+                console.log(res)
+                qtd_atual_antiga = res[0].qtd_atual
+                qtd_total_antiga = res[0].qtd_total
+                return this.createConnectionSQL()
+            })
             .then(() => {
                 return new Promise((resolve, reject) => {
                     this.conn.connect((err) => {
                         if (err) {
                             reject(err)
                         } else {
-                            console.log(params)
                             const sql = `UPDATE ${this.table} SET 
-                            qtd = ${params.qtd},
+                            qtd_total = ${params.qtd},
                             titulo = "${params.titulo}",
                             genero_id = ${params.idGenero},
                             tipo_id = ${params.idTipo},
                             autor = "${params.autor}",
-                            descricao = "${params.descricao}"
+                            descricao = "${params.descricao}",
+                            qtd_atual = ${qtd_atual_antiga + (params.qtd - qtd_total_antiga)}
                         WHERE id_${this.table} = ${id}`
+
+                            this.conn.query(sql, (err, result) => {
+                                if (err) {
+                                    reject(err)
+                                } else {
+                                    resolve(result)
+                                }
+                            })
+                        }
+                    })
+                })
+            })
+            .then((res) => {
+                this.conn.end()
+                return Promise.resolve(res)
+            })
+            .catch((err) => {
+                this.conn.end()
+                return Promise.reject(err)
+            })
+    }
+
+    modifyQtdActual(id, type, qtd = 1) {
+        let job = {}
+        return this.getById(id)
+            .then((res) => {
+                job = res[0]
+                return this.createConnectionSQL()
+            })
+            .then(() => {
+                return new Promise((resolve, reject) => {
+                    this.conn.connect((err) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            let finalQtd = null
+                            if (type === "increment") {
+                                finalQtd = job.qtd_atual + qtd
+                            } else if (type === "decrement") {
+                                finalQtd = job.qtd_atual - qtd
+                            }
+
+                            const sql = `UPDATE obra sobra SET qtd_atual = ${finalQtd} WHERE id_Obra = ${id}`
 
                             this.conn.query(sql, (err, result) => {
                                 if (err) {

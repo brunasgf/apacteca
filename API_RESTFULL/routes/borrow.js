@@ -75,6 +75,29 @@ class RouteBorrow {
                         console.log(err)
                     })
             })
+
+        this.app.route('/borrow/replace/:id')
+            .get((req, res) => {
+                return this.borrowController.replaceBook(req.params.id)
+                    .then(response => {
+                        res.status(200)
+                        const resp = {
+                            sucess: true,
+                            message: "Obra devolvida com sucesso",
+                            data: response
+                        }
+                        res.json(resp)
+                    })
+                    .catch((err) => {
+                        res.status(err.statusCode)
+                        const resp = {
+                            sucess: false,
+                            message: err.message,
+                            data: null
+                        }
+                        res.json(resp)
+                    })
+            })
     }
 }
 

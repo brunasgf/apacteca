@@ -59,39 +59,40 @@ INSERT INTO tipo(nome) VALUES
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `apacteca_db`.`obra` (
   `id_Obra` INT NOT NULL AUTO_INCREMENT,
-  `qtd` INT NOT NULL,
+  `qtd_total` INT NOT NULL,
   `titulo` VARCHAR(45) NOT NULL,
   `genero_id` INT NOT NULL,
   `status_id` INT NOT NULL,
   `tipo_id` INT NOT NULL,
   `autor` VARCHAR(45) NOT NULL,
   `descricao` VARCHAR(500) NOT NULL,
+  `qtd_atual` INT NOT NULL,
   PRIMARY KEY (`id_Obra`),
-  INDEX `fk_Obra_genero_idx` (`genero_id` ASC),
-  INDEX `fk_obra_status_idx` (`status_id` ASC),
+  INDEX `fk_Obra_genero1_idx` (`genero_id` ASC),
+  INDEX `fk_obra_status1_idx` (`status_id` ASC),
   INDEX `fk_obra_tipo1_idx` (`tipo_id` ASC),
-  CONSTRAINT `fk_Obra_genero`
+  CONSTRAINT `fk_Obra_genero1`
     FOREIGN KEY (`genero_id`)
     REFERENCES `apacteca_db`.`genero` (`id_genero`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_obra_status`
+  CONSTRAINT `fk_obra_status1`
     FOREIGN KEY (`status_id`)
     REFERENCES `apacteca_db`.`status` (`id_status`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_obra_tipo`
+  CONSTRAINT `fk_obra_tipo1`
     FOREIGN KEY (`tipo_id`)
     REFERENCES `apacteca_db`.`tipo` (`id_tipo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-INSERT INTO `obra` (`id_Obra`, `qtd`, `titulo`, `genero_id`, `status_id`, `tipo_id`, `autor`, `descricao`) VALUES
-(20, 5, 'O Alquimista', 10, 2, 1, 'Paulo Coelho', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '),
-(21, 2, 'Como Vejo o Mundo', 5, 2, 1, 'Albert Einstein', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '),
-(22, 1, 'Mr. Mercedes', 1, 2, 1, 'Stephen King', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '),
-(23, 4, 'A Lagoa Azul', 15, 2, 2, 'Randal Kleiser', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ');
+INSERT INTO `obra` (`id_Obra`, `qtd_total`, `titulo`, `genero_id`, `status_id`, `tipo_id`, `autor`, `descricao`, `qtd_atual`) VALUES
+(20, 5, 'O Alquimista', 10, 2, 1, 'Paulo Coelho', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ', 5),
+(21, 2, 'Como Vejo o Mundo', 5, 2, 1, 'Albert Einstein', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ', 2),
+(22, 1, 'Mr. Mercedes', 1, 2, 1, 'Stephen King', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ', 1),
+(23, 4, 'A Lagoa Azul', 15, 2, 2, 'Randal Kleiser', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ', 4);
 -- -----------------------------------------------------
 -- Table `apacteca_db`.`pessoa`
 -- -----------------------------------------------------

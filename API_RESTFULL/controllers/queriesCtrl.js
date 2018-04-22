@@ -26,7 +26,7 @@ class Query {
                         if (err) {
                             reject(err)
                         } else {
-                            const sql = `SELECT * FROM ${this.table} WHERE id_${this.table} = ${id}`
+                            const sql = `SELECT * FROM ${this.table} WHERE id${this.table} = ${id}`
 
                             this.conn.query(sql, (err, result, fields) => {
                                 if (err) {
