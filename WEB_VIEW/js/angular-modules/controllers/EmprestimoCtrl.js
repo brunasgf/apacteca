@@ -1,7 +1,7 @@
 const EmprestimoCtrl = angular.module('apacteca')
 
-EmprestimoCtrl.controller('EmprestimoCtrl', ['$scope', 'Emprestimo', 'Notify',
-    ($scope, Emprestimo, Notify) => {
+EmprestimoCtrl.controller('EmprestimoCtrl', ['$scope', 'Emprestimo', 'Obra', 'Notify',
+    ($scope, Emprestimo, Obra, Notify) => {
 
         $scope.emprestimo = {
             // id_emprestimo : null,
@@ -22,8 +22,23 @@ EmprestimoCtrl.controller('EmprestimoCtrl', ['$scope', 'Emprestimo', 'Notify',
             data_devolucao: null
         }
 
+        $scope.obra = {
+            id_Obra: null,
+            titulo: null,
+            idTipo: null,
+            autor: null,
+            idGenero: null,
+            idStatus: null
+        }
+
+        $scope.pessoa = {
+            nome: null,
+            rg: null
+        }
+
         $scope.listaEmprestimo = [];
-        $scope.isDisabled = true
+        $scope.isDisabled = true;
+        $scope.listaObra = [];
 
         const OpenModalNovoEmprestimo = () => {
             return Notify.openModalTemplate("./views/emprestimo/criar.html")
@@ -52,24 +67,51 @@ EmprestimoCtrl.controller('EmprestimoCtrl', ['$scope', 'Emprestimo', 'Notify',
             return Emprestimo.getAll($scope.filter)
                 .then((res) => {
                     $scope.listaEmprestimo = res.data.data;
-                    console.log(emprestimo)
+                    console.log($scope.listaEmprestimo);
                 })
                 .catch((err) => {
                     console.log(err)
                 })
         }
 
+        const getObras = () => {
+            return Obra.getAll($scope.obra)
+                .then((res) => {
+                    $scope.listaObra = res.data.data;
+                    console.log($scope.listaObra);
+                })
+                .catch((err) => {
+                    toastr.error("Algo de errado aconteceu", "Você pode ter problemas em escolher as obras :(")
+                })
+        }
+
+        const getPessoa = () =>{
+
+           // $scope.nomePessoa = "@";
+
+           return Emprestimo.getPessoa($scope.numRG)
+           .then((res) => {
+               $scope.pessoa = res.data.data;
+               console.log($scope.pessoa);
+           })
+           .catch((err) => {
+               toastr.error("Algo de errado aconteceu", "Você pode ter problemas em escolher as obras :(")
+           })
+           
+        }
 
         const getFormatedData = (data) => {
             const date = new Date(parseInt(data));
             const msg = date.toLocaleString();
-            if(msg == 'Invalid Date'){
+            if (msg == 'Invalid Date') {
                 return '-';
-            }else {
+            } else {
                 return msg;
             }
         }
 
+        $scope.getPessoa = getPessoa
+        $scope.getObras = getObras
         $scope.getFormatedData = getFormatedData
         $scope.adicionarEmprestimo = adicionarEmprestimo
         $scope.getTodosEmprestimos = getTodosEmprestimos

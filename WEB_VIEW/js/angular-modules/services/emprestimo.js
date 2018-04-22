@@ -26,6 +26,14 @@ emprestimoSrv.service("Emprestimo", ['$http',
             return $http.post(`http://localhost:8001/borrow`, request)
         }
 
+        this.getPerson = (pessoa) => {
+            const request = {
+                nome : pessoa.nome,
+                rg : pessoa.rg
+            }
+            return $http.post(`http://localhost:8001/person/getByRg/${pessoa.rg}`, request)
+        }
+
        
     }
 ])

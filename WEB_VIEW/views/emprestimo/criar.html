@@ -5,25 +5,18 @@
 
     <div class="col-7 form-group">
         <label>RG</label>
-        <input type="text" class="form-control" ng-model="emprestimo.rgPessoa" placeholder="Digite o número do RG. Exemplo: MG17234899">
+        <input type="text" class="form-control" ng-change="getPessoa()" ng-value="numRG" ng-model="emprestimo.rgPessoa" placeholder="Digite o número do RG. Exemplo: MG17234899">
     </div>
 
     <div class="col-5 form-group">
         <label>Nome</label>
-        <input class="form-control" ng-model="emprestimo.nomePessoa" placeholder="Nome da Pessoa. Exemplo: Machado de Assis" ></input>
+        <input class="form-control" ng-model="emprestimo.nomePessoa"  ng-value="nomePessoa"></input>
     </div>
 
-    <div class="col-5 form-group">
-        <label>ID Pessoa</label>
-        <input class="form-control" ng-model="emprestimo.idPessoa" placeholder="Nome da Pessoa. Exemplo: Machado de Assis"></input>
-    </div>
-
-    <div class="col-6 form-group">
+    <div class="col-3 form-group">
         <label>Obra</label>
-        <input type="text" class="form-control" ng-model="emprestimo.idObra" placeholder="ID da obra">
+        <select class="form-control" ng-model="emprestimo.idObra" ng-options="obra.id_Obra as obra.titulo for obra in listaObra" ></select>
     </div>
-
-    
 
     <div class="col-6"></div>
 

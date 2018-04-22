@@ -35,6 +35,7 @@ obraSrv.service("Obra", ['$http',
 
         this.getAll = (filter) => {
             const request = {
+                
                 autor: filter.autor,
                 titulo: filter.titulo,
                 idTipo: filter.idTipo,
