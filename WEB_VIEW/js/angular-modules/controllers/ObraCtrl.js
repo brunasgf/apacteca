@@ -159,7 +159,7 @@ ObraCTrl.controller('ObraCtrl', ['$scope', 'Notify', 'Obra', 'toastr', 'Listas',
             $scope.obraView.idTipo = $scope.ngDialogData.dadosObra.idTipo
             $scope.obraView.autor = $scope.ngDialogData.dadosObra.autor
             $scope.obraView.idGenero = $scope.ngDialogData.dadosObra.idGenero
-            $scope.obraView.qtd = $scope.ngDialogData.dadosObra.qtd
+            $scope.obraView.qtd = $scope.ngDialogData.dadosObra.qtd_total
             $scope.obraView.descricao = $scope.ngDialogData.dadosObra.descricao
             $scope.obraView.status = $scope.ngDialogData.dadosObra.status
             $scope.obraView.idObra = $scope.ngDialogData.dadosObra.id_Obra

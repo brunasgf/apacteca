@@ -47,7 +47,8 @@ class JobController extends Queries {
                         } else {
 
                             const sql = `SELECT id_Obra,
-                            qtd,
+                            qtd_total,
+                            qtd_atual,
                             titulo,
                             gen.nome 'genero',
                             gen.id_genero 'idGenero',
