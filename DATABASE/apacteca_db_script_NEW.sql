@@ -112,20 +112,20 @@ INSERT INTO pessoa (nome, rg) VALUES
 -- Table `apacteca_db`.`emprestimo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `apacteca_db`.`emprestimo` (
-  `id_emprestimo` INT NOT NULL AUTO_INCREMENT,
+  `idemprestimo` INT NOT NULL AUTO_INCREMENT,
   `obra_id` INT NOT NULL,
   `pessoa_id` INT NOT NULL,
   `data_emprestimo` VARCHAR(45) NOT NULL,
   `data_devolucao` VARCHAR(45) NULL,
-  PRIMARY KEY (`id_emprestimo`),
-  INDEX `fk_emprestimo_Obra_idx` (`obra_id` ASC),
-  INDEX `fk_emprestimo_pessoa_idx` (`pessoa_id` ASC),
-  CONSTRAINT `fk_emprestimo_Obra`
+  PRIMARY KEY (`idemprestimo`),
+  INDEX `fk_emprestimo_Obra1_idx` (`obra_id` ASC),
+  INDEX `fk_emprestimo_pessoa1_idx` (`pessoa_id` ASC),
+  CONSTRAINT `fk_emprestimo_Obra1`
     FOREIGN KEY (`obra_id`)
     REFERENCES `apacteca_db`.`obra` (`id_Obra`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_emprestimo_pessoa`
+  CONSTRAINT `fk_emprestimo_pessoa1`
     FOREIGN KEY (`pessoa_id`)
     REFERENCES `apacteca_db`.`pessoa` (`id_pessoa`)
     ON DELETE NO ACTION

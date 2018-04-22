@@ -5,6 +5,7 @@ const RouterPerson = require("./routes/person")
 const RouterType = require("./routes/type")
 const RouterGender = require("./routes/gender")
 const RouterStatus = require("./routes/status")
+const RouterBorrow = require("./routes/borrow")
 const Config = require('./config/config')
 
 class App {
@@ -30,6 +31,7 @@ class App {
         this.routerGender = new RouterGender(this.app)
         this.routertype = new RouterType(this.app)
         this.routerPerson = new RouterPerson(this.app)
+        this.routerBorrow = new RouterBorrow(this.app)
     }
 }
 

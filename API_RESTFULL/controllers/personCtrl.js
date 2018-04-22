@@ -1,9 +1,8 @@
 const Queries = require("./queriesCtrl")
-const Emprestimo = require("./borrowingCtrl")
 
 class PersonController extends Queries {
     constructor() {
-        super("pessoa", ['nome', 'rg'])
+        super("pessoa", ['nome', 'rg', 'qtd_emprestimos_atvo', 'data_ultimo_emprestimo'])
     }
 
     create(params) {
@@ -15,7 +14,7 @@ class PersonController extends Queries {
                             reject(err)
                         } else {
                             console.log(params)
-                            const sql = `INSERT INTO ${this.table} (${this.strColumns}) VALUES ("${params.nome}", "${params.rg}")`
+                            const sql = `INSERT INTO ${this.table} (${this.strColumns}) VALUES ("${params.nomePessoa}", "${params.rgPessoa}", 0, '0')`
 
                             this.conn.query(sql, (err, result) => {
                                 if (err) {
@@ -97,6 +96,37 @@ class PersonController extends Queries {
                             reject(err)
                         } else {
                             const sql = `SELECT * FROM ${this.table} WHERE rg = "${rg}"`
+
+                            this.conn.query(sql, (err, result, fields) => {
+                                if (err) {
+                                    reject(err)
+                                } else {
+                                    resolve(result)
+                                }
+                            })
+                        }
+                    })
+                })
+            })
+            .then((res) => {
+                this.conn.end()
+                return Promise.resolve(res)
+            })
+            .catch((err) => {
+                this.conn.end()
+                return Promise.reject(err)
+            })
+    }
+
+    updateEmprestimoData(id, date) {
+        return this.createConnectionSQL()
+            .then(() => {
+                return new Promise((resolve, reject) => {
+                    this.conn.connect((err) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            const sql = `UPDATE pessoa SET data_ultimo_emprestimo = ${date} WHERE id_pessoa=${id}`
 
                             this.conn.query(sql, (err, result, fields) => {
                                 if (err) {
