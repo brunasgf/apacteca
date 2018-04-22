@@ -2,12 +2,15 @@ const bodyParser = require('body-parser')
 const express = require('express')
 const RouterJob = require("./routes/job")
 const RouterPerson = require("./routes/person")
+const RouterType = require("./routes/type")
+const RouterGender = require("./routes/gender")
+const RouterStatus = require("./routes/status")
 const Config = require('./config/config')
 
 class App {
-    constructor(){
+    constructor() {
         this.app = express()
-        this.app.all('*', function(req, res,next) {
+        this.app.all('*', function (req, res, next) {
             var responseSettings = {
                 "AccessControlAllowOrigin": req.headers.origin,
                 "AccessControlAllowHeaders": "Content-Type,X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name",
@@ -15,7 +18,7 @@ class App {
                 "AccessControlAllowCredentials": true
             }
             res.header("Access-Control-Allow-Credentials", responseSettings.AccessControlAllowCredentials)
-            res.header("Access-Control-Allow-Origin",  "*")
+            res.header("Access-Control-Allow-Origin", "*")
             res.header("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
             res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS")
             res.header()
@@ -23,6 +26,9 @@ class App {
         })
         this.app.use(bodyParser.json())
         this.routerJob = new RouterJob(this.app)
+        this.routerStatus = new RouterStatus(this.app)
+        this.routerGender = new RouterGender(this.app)
+        this.routertype = new RouterType(this.app)
         this.routerPerson = new RouterPerson(this.app)
     }
 }

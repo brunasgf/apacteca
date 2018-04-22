@@ -37,21 +37,24 @@ class JobController extends Queries {
             })
     }
 
-    getAll(params){
+    getAll(params) {
         return this.createConnectionSQL()
-        .then(()=>{
-            return new Promise((resolve, reject)=>{
-                this.conn.connect((err)=>{
-                    if(err){
-                        reject(err)
-                    }else{
+            .then(() => {
+                return new Promise((resolve, reject) => {
+                    this.conn.connect((err) => {
+                        if (err) {
+                            reject(err)
+                        } else {
 
-                        const sql = `SELECT id_Obra,
+                            const sql = `SELECT id_Obra,
                             qtd,
                             titulo,
                             gen.nome 'genero',
+                            gen.id_genero 'idGenero',
                             sta.nome 'status',
+                            sta.id_status 'idStatus',
                             tip.nome 'tipo',
+                            tip.id_tipo 'idTipo',
                             autor,
                             descricao
                         FROM apacteca_db.obra as obr
@@ -59,38 +62,38 @@ class JobController extends Queries {
                         INNER JOIN status as sta ON sta.id_status = obr.status_id
                         INNER JOIN tipo as tip ON tip.id_tipo= obr.tipo_id
                         ${this.getFilterQuery(params)}ORDER BY id_obra`
-    
-                        this.conn.query(sql, (err, result, fields)=>{
-                            if(err){
-                                reject(err)
-                            }else{
-                                resolve(result)
-                            }
-                        })
-                    }
+
+                            this.conn.query(sql, (err, result, fields) => {
+                                if (err) {
+                                    reject(err)
+                                } else {
+                                    resolve(result)
+                                }
+                            })
+                        }
+                    })
                 })
             })
-        })
-        .then((res)=>{
-            this.conn.end()
-            return Promise.resolve(res)
-        })
-        .catch((err)=>{
-            this.conn.end()
-            return Promise.reject(err)
-        })
+            .then((res) => {
+                this.conn.end()
+                return Promise.resolve(res)
+            })
+            .catch((err) => {
+                this.conn.end()
+                return Promise.reject(err)
+            })
     }
 
-    getById(id){
+    getById(id) {
         return this.createConnectionSQL()
-        .then(()=>{
-            return new Promise((resolve, reject)=>{
-                this.conn.connect((err)=>{
-                    if(err){
-                        reject(err)
-                    }else{
+            .then(() => {
+                return new Promise((resolve, reject) => {
+                    this.conn.connect((err) => {
+                        if (err) {
+                            reject(err)
+                        } else {
 
-                        const sql = `SELECT id_Obra,
+                            const sql = `SELECT id_Obra,
                             qtd,
                             titulo,
                             gen.nome 'genero',
@@ -103,66 +106,65 @@ class JobController extends Queries {
                         INNER JOIN status as sta ON sta.id_status = obr.status_id
                         INNER JOIN tipo as tip ON tip.id_tipo= obr.tipo_id
                         WHERE id_Obra = ${id}`
-    
-                        this.conn.query(sql, (err, result, fields)=>{
-                            if(err){
-                                reject(err)
-                            }else{
-                                resolve(result)
-                            }
-                        })
-                    }
+
+                            this.conn.query(sql, (err, result, fields) => {
+                                if (err) {
+                                    reject(err)
+                                } else {
+                                    resolve(result)
+                                }
+                            })
+                        }
+                    })
                 })
             })
-        })
-        .then((res)=>{
-            this.conn.end()
-            return Promise.resolve(res)
-        })
-        .catch((err)=>{
-            this.conn.end()
-            return Promise.reject(err)
-        })
+            .then((res) => {
+                this.conn.end()
+                return Promise.resolve(res)
+            })
+            .catch((err) => {
+                this.conn.end()
+                return Promise.reject(err)
+            })
     }
 
-    getFilterQuery(params){
-        let query = ""
+    getFilterQuery(params) {
+        let query = []
+        let resp = ""
         let keys = Object.keys(params)
-        if(keys.length){
-            query += "WHERE "
-            for(let i = 0 ; i < keys.length ; i++){
-                if(i >= 1){
-                    query += "AND "
-                }
-
-                if(keys[i] === 'autor'){
-                    query += `autor LIKE '%${params[keys[i]]}%' `
-                } else if(keys[i] === 'titulo'){
-                    query += `titulo LIKE '%${params[keys[i]]}%' `
-                } else if(keys[i] === 'idTipo'){
-                    query += `tipo_id  = ${params[keys[i]]} `
-                } else if(keys[i] === 'idStatus'){
-                    query += `status_id = ${params[keys[i]]} `
-                } else if(keys[i] === 'idGenero'){
-                    query += `genero_id = ${params[keys[i]]} `
+        if (keys.length) {
+            for (let i = 0; i < keys.length; i++) {
+                if (keys[i] === 'autor' && params[keys[i]]) {
+                    query.push(`autor LIKE '%${params[keys[i]]}%'`)
+                } else if (keys[i] === 'titulo' && params[keys[i]]) {
+                    query.push(`titulo LIKE '%${params[keys[i]]}%'`)
+                } else if (keys[i] === 'idTipo' && params[keys[i]]) {
+                    query.push(`tipo_id  = ${params[keys[i]]}`)
+                } else if (keys[i] === 'idStatus' && params[keys[i]]) {
+                    query.push(`status_id = ${params[keys[i]]}`)
+                } else if (keys[i] === 'idGenero' && params[keys[i]]) {
+                    query.push(`genero_id = ${params[keys[i]]}`)
                 }
             }
+
+            if (query.length) {
+                resp = `WHERE ${query.join(" AND ")} `
+            }
         }
+        return resp
+    }
 
-        return query
-    }    
 
-
-    update(params, id){
+    update(params, id) {
         return this.createConnectionSQL()
-        .then(()=>{
-            return new Promise((resolve, reject)=>{
-                this.conn.connect((err)=>{
-                    if(err){
-                        reject(err)
-                    }else{
-                        console.log(params)
-                        const sql = `UPDATE ${this.table} SET 
+            .then(() => {
+                return new Promise((resolve, reject) => {
+                    this.conn.connect((err) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            console.log(params)
+                            const sql = `UPDATE ${this.table} SET 
                             qtd = ${params.qtd},
                             titulo = "${params.titulo}",
                             genero_id = ${params.idGenero},
@@ -170,26 +172,26 @@ class JobController extends Queries {
                             autor = "${params.autor}",
                             descricao = "${params.descricao}"
                         WHERE id_${this.table} = ${id}`
-    
-                        this.conn.query(sql,(err, result)=>{
-                            if(err){
-                                reject(err)
-                            }else{
-                                resolve(result)
-                            }
-                        })
-                    }
+
+                            this.conn.query(sql, (err, result) => {
+                                if (err) {
+                                    reject(err)
+                                } else {
+                                    resolve(result)
+                                }
+                            })
+                        }
+                    })
                 })
             })
-        })
-        .then((res)=>{
-            this.conn.end()
-            return Promise.resolve(res)
-        })
-        .catch((err)=>{
-            this.conn.end()
-            return Promise.reject(err)
-        })
+            .then((res) => {
+                this.conn.end()
+                return Promise.resolve(res)
+            })
+            .catch((err) => {
+                this.conn.end()
+                return Promise.reject(err)
+            })
     }
 }
 

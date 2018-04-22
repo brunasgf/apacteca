@@ -1,4 +1,4 @@
-<div class="row" ng-controller="ObraCtrl">
+<div class="row" ng-controller="ObraCtrl" ng-init="init()">
     <div class="col-12">
         <div class="row mb-4">
             <div class="col-6">
@@ -11,35 +11,84 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-4 form-group">
+                <label>Titulo</label>
+                <input type="text" class="form-control" ng-model="filtro.titulo" placeholder="Pesquise pelo nome de um livro">
+            </div>
+
+            <div class="col-4 form-group">
+                <label>Autor</label>
+                <input type="text" class="form-control" ng-model="filtro.autor" placeholder="Pesquise pelo nome de um autor">
+            </div>
+
+            <div class="col-4 form-group">
+                <label>Tipo</label>
+                <select class="form-control" ng-model="filtro.idTipo" ng-options="type.id_tipo as type.nome for type in listaTipo"></select>
+            </div>
+
+            <div class="col-4 form-group">
+                <label>Status</label>
+                <select class="form-control" ng-model="filtro.idStatus" ng-options="status.id_status as status.nome for status in listaStatus"></select>
+            </div>
+
+            <div class="col-4 form-group">
+                <label>Genero</label>
+                <select class="form-control" ng-model="filtro.idGenero" ng-options="gender.id_genero as gender.nome for gender in listaGenero"></select>
+            </div>
+
+            <div class="col-4 form-group">
+                <button class="btn btn-search btn-block btn-round hasLabel" ng-click="getTodasObras()">Pesquisar</button>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-12">
-                <table class="table table-hover table-striped table-bordered">
+                <h3 class="sub-title">Lista de Obras</h3>
+            </div>
+            <div class="col-12">
+                <table class="table table-hover table-striped table-bordered" ng-init="getTodasObras()">
                     <thead>
                         <tr>
                             <th>Título da obra</th>
                             <th>Autor/Diretor</th>
+                            <th>Tipo</th>
+                            <th>Genero</th>
+                            <th class="text-center">Status</th>
                             <th class="text-center wid-100">Visualizar</th>
                             <th class="text-center wid-100">Editar</th>
                             <th class="text-center wid-100">Excluir</th>
                         </tr>
                         <tbody>
-                            <tr>
-                                <td>O morro dos ventos uivantes</td>
-                                <td>não lembro</td>
+                            <tr ng-repeat="obra in listaObra">
+                                <td>{{obra.titulo}}</td>
+                                <td>{{obra.autor}}</td>
+                                <td>{{obra.tipo}}</td>
+                                <td>{{obra.genero}}</td>
+                                <td class="text-center">
+                                    <span ng-if="obra.status === 'Emprestado'" class="text-danger">
+                                        <i class="fa fa-times"></i>{{obra.status}}
+                                    </span>
+                                    <span ng-if="obra.status === 'Livre'" class="text-success">
+                                        <i class="fa fa-check"></i>{{obra.status}}
+                                    </span>
+                                </td>
                                 <td class="text-center wid-100">
-                                    <button class="btn btn-info buttn-sm btn-round">
+                                    <button class="btn btn-info buttn-sm btn-round" ng-click="OpenModalUpdate(true, obra)">
                                         <i class="fa fa-eye"></i>
                                     </button>
                                 </td>
                                 <td class="text-center wid-100">
-                                    <button class="btn btn-warning buttn-sm btn-round">
+                                    <button class="btn btn-warning buttn-sm btn-round" ng-click="OpenModalUpdate(false, obra)">
                                         <i class="fa fa-edit"></i>
                                     </button>
                                 </td>
                                 <td class="text-center wid-100">
-                                    <button class="btn btn-danger buttn-sm btn-round">
+                                    <button class="btn btn-danger buttn-sm btn-round" ng-click="deletarObra(obra.id_Obra)">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </td>
+                            </tr>
+                            <tr ng-if="!listaObra.length">
+                                <td colspan="8">Nenhuma Obra Encotrada</td>
                             </tr>
                         </tbody>
                     </thead>

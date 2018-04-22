@@ -2,7 +2,7 @@
   "name": "apacteca",
   "version": "1.0.0",
   "description": "application for manage library",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {},
   "author": "Bruna Silva, Luiz Henrique, Otavio Miranda",
   "license": "ISC",
@@ -12,6 +12,7 @@
     "angular-route": "^1.6.9",
     "angular-toastr": "^2.1.1",
     "bootstrap": "^4.1.0",
+    "electron": "^1.8.4",
     "express": "^4.14.0",
     "font-awesome": "^4.7.0",
     "ng-dialog": "^1.4.0"

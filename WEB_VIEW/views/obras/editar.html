@@ -1,0 +1,58 @@
+<div class="row" ng-controller="ObraCtrl" ng-init="init(); presetData()">
+    <div class="col-6">
+        <h1 class="main-title">Obra</h1>
+    </div>
+
+    <div class="col-6 text-right">
+        <span ng-if="obraView.status === 'Emprestado'" class="p-3 mr-2 badge badge-pill badge-danger">
+            {{obraView.status}}
+        </span>
+
+        <span ng-if="obraView.status === 'Livre'" class="p-3 mr-2 badge badge-pill badge-success">
+            {{obraView.status}}
+        </span>
+    </div>
+
+    <div class="col-7 form-group">
+        <label>Título</label>
+        <input type="text" class="form-control" ng-disabled="ngDialogData.isOnlyView" ng-model="obraView.titulo" placeholder="Digite um titulo. Exemplo: Branca de neve e os sete anões">
+    </div>
+
+    <div class="col-5 form-group">
+        <label>Tipo</label>
+        <select class="form-control" ng-model="obraView.idTipo" ng-disabled="ngDialogData.isOnlyView" ng-options="type.id_tipo as type.nome for type in listaTipo"></select>
+    </div>
+
+    <div class="col-5 form-group">
+        <label>Autor/Diretor</label>
+        <input type="text" class="form-control" ng-disabled="ngDialogData.isOnlyView" ng-model="obraView.autor" placeholder="Digite o nome de um autor. Exemplo: Machado de Assis"
+            s>
+    </div>
+
+    <div class="col-3 form-group">
+        <label>Genero</label>
+        <select class="form-control" ng-model="obraView.idGenero" ng-disabled="ngDialogData.isOnlyView" ng-options="gender.id_genero as gender.nome for gender in listaGenero"></select>
+    </div>
+
+    <div class="col-4 form-group">
+        <label>N° de Exemplares</label>
+        <input type="text" class="form-control" ng-disabled="ngDialogData.isOnlyView" ng-model="obraView.qtd" placeholder="Exemplo: 100">
+    </div>
+
+    <div class="col-12 form-group">
+        <label>Descrição</label>
+        <textarea class="form-control" ng-disabled="ngDialogData.isOnlyView" ng-model="obraView.descricao" rows="4" placeholder="Digite uma breve descrição do livro"></textarea>
+    </div>
+
+    <div class="col-6"></div>
+
+    <div class="col-12 text-right">
+        <button class="btn btn-danger btn-round" ng-click="closeThisDialog(false)">
+            {{ (ngDialogData.isOnlyView) ? 'Voltar' : 'Cancelar' }}
+        </button>
+
+        <button class="btn btn-success btn-round" ng-if="!ngDialogData.isOnlyView" ng-click="editarObra(obraView)">
+            Adicionar
+        </button>
+    </div>
+</div>

@@ -2,11 +2,12 @@ const notify = angular.module("apacteca")
 
 notify.service("Notify", ['ngDialog',
     function (ngDialog) {
-        this.openModalTemplate = function (title, url) {
+        this.openModalTemplate = function (url, data = null) {
             return ngDialog.open({
                 template: url,
                 className: 'ngdialog-theme-default',
                 width: '60%',
+                data: data
             });
         }
 
@@ -23,7 +24,7 @@ notify.service("Notify", ['ngDialog',
                     </div>
 
                     <div class="col-12 text-right">
-                        <button class="btn btn-info btn-round" ng-click="closeThisDialog(false)">
+                        <button class="btn btn-gray btn-round" ng-click="closeThisDialog(false)">
                             Cancelar
                         </button>
                         <button class="btn btn-danger btn-round" ng-click="confirm(true)">

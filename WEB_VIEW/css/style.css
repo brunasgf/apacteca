@@ -36,7 +36,7 @@ audio {
 
 code {text-align: left !important;}
 
-label{ font-weight:400; }
+label{ font-weight:700; }
 
 
 th { border-bottom: none !important; }
@@ -2012,10 +2012,10 @@ ul li a:focus {
   padding: 20px;
   padding-top: 35px;
   background-color: #2196F3;
-  padding-bottom: 11px;
+  padding-bottom: 7px;
   color: #C62828;
   cursor: pointer;
-  margin-top: 12px;
+  margin-top: 9px;
   -webkit-box-shadow: 0px 9px 0px 0px #2196F3, 0 -9px 0px 0px #2196F3, 4px 0 15px -4px rgba(0, 0, 0, 0.16), -4px 0 15px -4px rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 0px 9px 0px 0px #2196F3, 0 -9px 0px 0px #2196F3, 4px 0 15px -4px rgba(0, 0, 0, 0.16), -4px 0 15px -4px rgba(0, 0, 0, 0.12);
   -ms-box-shadow: 0px 9px 0px 0px #2196F3, 0 -9px 0px 0px #2196F3, 4px 0 15px -4px rgba(0, 0, 0, 0.16), -4px 0 15px -4px rgba(0, 0, 0, 0.12);
@@ -2025,6 +2025,11 @@ ul li a:focus {
 
 
 .opener-left-menu.is-open {
+  padding-top: 29px;
+  padding-bottom: 17px;
+}
+
+.opener-left-menu.is-closed {
   padding-top: 29px;
   padding-bottom: 17px;
 }
@@ -2096,7 +2101,7 @@ ul li a:focus {
 }
 
 .opener-left-menu.is-closed .top {
-  top: 15px;
+  top: 25px;
   -webkit-transition: all .35s ease-in-out;
   -moz-transition: all .35s ease-in-out;
   -ms-transition: all .35s ease-in-out;
@@ -2105,20 +2110,11 @@ ul li a:focus {
 }
 
 .opener-left-menu.is-closed .middle {
-  top: 24px;
+  top: 35px;
 }
 
 .opener-left-menu.is-closed .bottom {
-  top: 32px;
-  -webkit-transition: all .35s ease-in-out;
-  -moz-transition: all .35s ease-in-out;
-  -ms-transition: all .35s ease-in-out;
-  -o-transition: all .35s ease-in-out;
-  transition: all .35s ease-in-out;
-}
-
-.opener-left-menu.is-closed:hover .top {
-  top: 10px;
+  top: 45px;
   -webkit-transition: all .35s ease-in-out;
   -moz-transition: all .35s ease-in-out;
   -ms-transition: all .35s ease-in-out;
@@ -6469,4 +6465,19 @@ ul li a:focus {
 .btn-gray {
     background-color: #d5d4d4;
     border-color: #d5d4d4;
+}
+
+.btn-search {
+    background-color: #dfab5d;
+    color: #FFF;
+}
+
+
+.btn-search:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem #F0AD4E;
+}
+
+.hasLabel {
+  margin-top: 25px;
 }

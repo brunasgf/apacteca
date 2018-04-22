@@ -1,57 +1,36 @@
-<div class="row" ng-controller="ObraCtrl">
+<div class="row" ng-controller="ObraCtrl" ng-init="init()">
     <div class="col-12">
         <h1 class="main-title">Criar Nova Obra</h1>
     </div>
 
     <div class="col-7 form-group">
         <label>Título</label>
-        <input type="text" class="form-control" ng-model="obra.titulo">
+        <input type="text" class="form-control" ng-model="obra.titulo" placeholder="Digite um titulo. Exemplo: Branca de neve e os sete anões">
     </div>
 
     <div class="col-5 form-group">
         <label>Tipo</label>
-        <select class="form-control" ng-model="obra.idTipo">
-            <option>Livro</option>
-            <option>DVD</option>
-        </select>
+        <select class="form-control" ng-model="obra.idTipo" ng-options="type.id_tipo as type.nome for type in listaTipo"></select>
     </div>
 
-    <div class="col-5 form-group">
+    <div class="col-6 form-group">
         <label>Autor/Diretor</label>
-        <input type="text" class="form-control" ng-model="obra.autor">
-    </div>
-
-    <div class="col-4 form-group">
-        <label>Gênero</label>
-        <select class="form-control" ng-model="obra.idGenero">
-            <option>Ação</option>
-            <option>Autoajuda</option>
-            <option>Biográfico</option>
-            <option>Científico</option>
-            <option>Conto</option>
-            <option>Crônicas</option>
-            <option>Épico</option>
-            <option>Fantasia</option>
-            <option>Ficção científica</option>
-            <option>Ficção histórica</option>
-            <option>Infantil</option>
-            <option>Novela</option>
-            <option>Poesia</option>
-            <option>Política</option>
-            <option>Romance</option>
-            <option>Terror</option>
-            <option>Outros</option>
-        </select>
+        <input type="text" class="form-control" ng-model="obra.autor" placeholder="Digite o nome de um autor. Exemplo: Machado de Assis">
     </div>
 
     <div class="col-3 form-group">
-        <label>N° de Exemplares</label>
-        <input type="text" class="form-control" ng-model="obra.qtd">
+        <label>Genero</label>
+        <select class="form-control" ng-model="obra.idGenero" ng-options="gender.id_genero as gender.nome for gender in listaGenero"></select>
+    </div>
+
+    <div class="col-3 form-group">
+        <label>N° total de Exemplares</label>
+        <input type="text" class="form-control" ng-model="obra.qtd" placeholder="Exemplo: 100">
     </div>
 
     <div class="col-12 form-group">
         <label>Descrição</label>
-        <textarea class="form-control" ng-model="obra.descricao" rows="4"></textarea>
+        <textarea class="form-control" ng-model="obra.descricao" rows="4" placeholder="Digite uma breve descrição do livro"></textarea>
     </div>
 
     <div class="col-6"></div>
