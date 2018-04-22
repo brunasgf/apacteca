@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <table class="table table-hover table-striped table-bordered" >
+                <table class="table table-hover table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>Obra</th>
@@ -28,7 +28,7 @@
                                 <td class="text-center">{{getFormatedData(emprestimo.data_emprestimo)}}</td>
                                 <td class="text-center">{{getFormatedData(emprestimo.data_devolucao)}}</td>
                                 <td class="text-center wid-100">
-                                    <button class="btn btn-warning buttn-sm btn-round">
+                                    <button ng-disabled="emprestimo.data_devolucao" class="btn btn-warning buttn-sm btn-round" ng-click="devolverLivro(emprestimo.idemprestimo)">
                                         <i class="fa fa-book"></i>
                                     </button>
                                 </td>

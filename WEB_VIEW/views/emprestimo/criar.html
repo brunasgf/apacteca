@@ -1,21 +1,21 @@
-<div class="row" ng-controller="EmprestimoCtrl">
+<div class="row" ng-controller="EmprestimoCtrl" ng-init="getObras()">
     <div class="col-12">
         <h1 class="main-title">Criar Nova Obra</h1>
     </div>
 
-    <div class="col-7 form-group">
+    <div class="col-4 form-group">
         <label>RG</label>
-        <input type="text" class="form-control" ng-change="getPessoa()" ng-value="numRG" ng-model="emprestimo.rgPessoa" placeholder="Digite o número do RG. Exemplo: MG17234899">
+        <input type="text" class="form-control" ng-blur="getPessoa(emprestimo.rgPessoa)" ng-model="emprestimo.rgPessoa" placeholder="Digite RG.Exemplo: MG17234899">
     </div>
 
-    <div class="col-5 form-group">
+    <div class="col-8 form-group">
         <label>Nome</label>
-        <input class="form-control" ng-model="emprestimo.nomePessoa"  ng-value="nomePessoa"></input>
+        <input class="form-control" ng-disabled="isDisabled" ng-model="emprestimo.nomePessoa"></input>
     </div>
 
-    <div class="col-3 form-group">
+    <div class="col-7 form-group">
         <label>Obra</label>
-        <select class="form-control" ng-model="emprestimo.idObra" ng-options="obra.id_Obra as obra.titulo for obra in listaObra" ></select>
+        <select class="form-control" ng-model="emprestimo.idObra" ng-options="obra.id_Obra as obra.titulo for obra in listaObra"></select>
     </div>
 
     <div class="col-6"></div>

@@ -110,6 +110,7 @@ class borrowController extends Queries {
                             reject(err)
                         } else {
                             const sql = `SELECT
+                            idemprestimo,
                             obr.id_Obra 'idObra',
                             obr.titulo 'titulo',
                             pss.id_pessoa 'idPessoa',

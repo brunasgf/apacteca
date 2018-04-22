@@ -1,10 +1,10 @@
 const EmprestimoCtrl = angular.module('apacteca')
 
-EmprestimoCtrl.controller('EmprestimoCtrl', ['$scope', 'Emprestimo', 'Obra', 'Notify',
-    ($scope, Emprestimo, Obra, Notify) => {
+EmprestimoCtrl.controller('EmprestimoCtrl', ['$scope', 'Emprestimo', 'Obra', 'Notify', 'toastr',
+    ($scope, Emprestimo, Obra, Notify, toastr) => {
 
         $scope.emprestimo = {
-            // id_emprestimo : null,
+            idemprestimo: null,
             idObra: null,
             idPessoa: null,
             nomePessoa: null,
@@ -54,11 +54,11 @@ EmprestimoCtrl.controller('EmprestimoCtrl', ['$scope', 'Emprestimo', 'Obra', 'No
         const adicionarEmprestimo = (emprestimo) => {
             return Emprestimo.create(emprestimo)
                 .then((res) => {
-                    console.log(res, "Criado com sucesso: EmprestimoCtrl")
+                    toastr.success(res.data.message, "Tudo Certo")
                     $scope.closeThisDialog()
                 })
                 .catch((err) => {
-                    console.log(err, "Algo não esta certo: EmprestimoCtrl")
+                    toastr.error(err.data.message, "Ops Algo de errado Aconteceu")
                 })
         }
 
@@ -67,10 +67,9 @@ EmprestimoCtrl.controller('EmprestimoCtrl', ['$scope', 'Emprestimo', 'Obra', 'No
             return Emprestimo.getAll($scope.filter)
                 .then((res) => {
                     $scope.listaEmprestimo = res.data.data;
-                    console.log($scope.listaEmprestimo);
                 })
                 .catch((err) => {
-                    console.log(err)
+                    toastr.error("Algo de errado aconteceu", "Você pode ter problemas em vizualizar os emprestimos :(")
                 })
         }
 
@@ -78,26 +77,41 @@ EmprestimoCtrl.controller('EmprestimoCtrl', ['$scope', 'Emprestimo', 'Obra', 'No
             return Obra.getAll($scope.obra)
                 .then((res) => {
                     $scope.listaObra = res.data.data;
-                    console.log($scope.listaObra);
                 })
                 .catch((err) => {
                     toastr.error("Algo de errado aconteceu", "Você pode ter problemas em escolher as obras :(")
                 })
         }
 
-        const getPessoa = () =>{
+        const getPessoa = (rg) => {
+            if (rg.length >= 5) {
+                return Emprestimo.getPerson(rg)
+                    .then((res) => {
+                        if (res && res.data && res.data.length) {
+                            $scope.isDisabled = true
+                            $scope.emprestimo.rgPessoa = res.data[0].rg
+                            $scope.emprestimo.nomePessoa = res.data[0].nome
+                        } else {
+                            $scope.isDisabled = false
+                            $scope.emprestimo.nomePessoa = ""
+                        }
+                    })
+            } else {
+                toastr.error("O Rg deve ter no minimo 5 caracteres", "Ops Cuidado")
+                $scope.isDisabled = true
+                $scope.emprestimo.nomePessoa = ""
+            }
+        }
 
-           // $scope.nomePessoa = "@";
-
-           return Emprestimo.getPessoa($scope.numRG)
-           .then((res) => {
-               $scope.pessoa = res.data.data;
-               console.log($scope.pessoa);
-           })
-           .catch((err) => {
-               toastr.error("Algo de errado aconteceu", "Você pode ter problemas em escolher as obras :(")
-           })
-           
+        const devolverLivro = (idEmprestimo) => {
+            return Emprestimo.devolverLivro(idEmprestimo)
+                .then((res) => {
+                    toastr.success(res.data.message, "Tudo Certo")
+                    getTodosEmprestimos()
+                })
+                .catch((err) => {
+                    toastr.error(err.data.message, "Algo de errado Aconteceu")
+                })
         }
 
         const getFormatedData = (data) => {
@@ -116,6 +130,7 @@ EmprestimoCtrl.controller('EmprestimoCtrl', ['$scope', 'Emprestimo', 'Obra', 'No
         $scope.adicionarEmprestimo = adicionarEmprestimo
         $scope.getTodosEmprestimos = getTodosEmprestimos
         $scope.OpenModalNovoEmprestimo = OpenModalNovoEmprestimo
+        $scope.devolverLivro = devolverLivro
 
     }
 ])

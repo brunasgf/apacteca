@@ -80,7 +80,7 @@ class JobController extends Queries {
                 return Promise.resolve(res)
             })
             .catch((err) => {
-                this.conn.end()
+                console.log(err)
                 return Promise.reject(err)
             })
     }

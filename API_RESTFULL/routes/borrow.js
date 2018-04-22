@@ -13,7 +13,7 @@ class RouteBorrow {
                         res.status(200)
                         const resp = {
                             sucess: true,
-                            message: "Emprestimo realizado com sucesso",
+                            message: null,
                             data: response
                         }
 
