@@ -11,6 +11,13 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-4 form-group">
+                <label>Busca:</label>
+                <input type="text" class="form-control" ng-model="busca" placeholder="Pesquise pelo nome da Obra ou Pessoa">
+            </div>
+
+        </div>
+        <div class="row">
             <div class="col-12">
                 <table class="table table-hover table-striped table-bordered">
                     <thead>
@@ -22,7 +29,7 @@
                             <th class="text-center wid-100">Devolver</th>
                         </tr>
                         <tbody>
-                            <tr ng-repeat="emprestimo in listaEmprestimo">
+                            <tr ng-repeat="emprestimo in listaEmprestimo | filter:busca">
                                 <td>{{emprestimo.titulo}}</td>
                                 <td>{{emprestimo.nomePessoa}}</td>
                                 <td class="text-center">{{getFormatedData(emprestimo.data_emprestimo)}}</td>
