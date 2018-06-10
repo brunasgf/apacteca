@@ -15,6 +15,27 @@ class borrowController extends Queries {
     create(params) {
         return this.createConnectionSQL()
             .then(() => {
+                const jobCtrl = new JobCtrl()
+                return jobCtrl.getById(params.idObra)
+            })
+            .then((res) => {
+                const error = {}
+
+                if (res && res.length) {
+                    if (res[0].qtd_atual === 0) {
+                        error.statusCode = 400
+                        error.message = "Não há mais obras disponiveis desse exemplar"
+                        return Promise.reject(error)
+                    } else {
+                        return Promise.resolve()
+                    }
+                } else {
+                    error.statusCode = 400
+                    error.message = "Essa obra não existe"
+                    return Promise.reject(error)
+                }
+            })
+            .then(() => {
                 const error = {}
                 if (!params.rgPessoa) {
                     error.statusCode = 400
