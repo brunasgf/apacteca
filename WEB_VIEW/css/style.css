@@ -521,6 +521,18 @@ p.quote{
   width:100%;
 }
 
+.margin-navbar {
+  margin-left: 12%;
+}
+
+.content-margin {
+  margin-top: 5%;
+}
+
+.navbar{
+  position: fixed;
+  width: 100%;
+}
 
 
 .navbar-header a{
@@ -1753,7 +1765,8 @@ ul li a:focus {
   }
 
   .navbar {
-    height: 55px;
+    z-index: 1;
+    height: 63px;
     background-color: #2196F3;
     color: #fff;
     border: none;
@@ -1917,7 +1930,7 @@ ul li a:focus {
 #left-menu .left-bg {
   background: url('../img/left-bg.png');
   background-repeat: repeat-x;
-  height: 90px;
+  height: 65px;
   left: -3px;
   position: relative;
   width: 100%;
